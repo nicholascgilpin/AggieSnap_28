@@ -3,7 +3,7 @@
    Minimally revised for C++11 features of GCC 4.6.3 or later
    Walter C. Daugherity		June 10, 2012 and January 9, 2014
 */
-
+// New comment to demonstrate merging
 /*
 	simple "Programming: Principles and Practice using C++" course header to
 	be used for the first few weeks.
