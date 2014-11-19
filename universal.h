@@ -1,5 +1,3 @@
-//header - univeral.h
-
 #include "std_lib_facilities_4.h"
 #include "Simple_window.h"
 #include "Graph.h"
@@ -10,19 +8,20 @@ using namespace Graph_lib;
 //This header file will contain stuff
 //
 
+
 //Class Display_Window creates the window and allows one to take input, manages the buttons and displays images
-Class Dispay_Window : Graph_lib::Window{ 
+class Display_Window : Graph_lib::Window{ 
     
     // Data Members
     Button next_button; //click to view the next picture
     Button previous_button; //click to view previous picture
     Button home_button; //click to return to viewing all images
     Button quit_button;//click to exit program
-    In_box search; //creates the input bar to search tags
+   /* In_box search; //creates the input bar to search tags
     In_box add_url;//allows you to enter urls
     In_box add_input;//allows user to input a new file name and tags
     Out_box mode; //indicates what images are being displayed 
-    
+    */
     // Function Declarations
     static void cb_next(Address,Address);
         void next();
@@ -42,7 +41,7 @@ Class Dispay_Window : Graph_lib::Window{
     
     Display_Window(Point xy, int w, int h, const string& title);
     
-};   
+};  
 
 //Input_object class is used to create and store input objects (picture and tags)
  class Input_obj{   
