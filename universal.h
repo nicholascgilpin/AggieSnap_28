@@ -1,4 +1,4 @@
-//header - univeral.h
+//header - "universal.h"
 
 #include "std_lib_facilities_4.h"
 #include "Simple_window.h"
@@ -11,7 +11,7 @@ using namespace Graph_lib;
 //
 
 //Class Display_Window creates the window and allows one to take input, manages the buttons and displays images
-Class Dispay_Window : Graph_lib::Window{ 
+class Display_Window : Graph_lib::Window{ 
     
     // Data Members
     Button next_button; //click to view the next picture
@@ -47,15 +47,17 @@ Class Dispay_Window : Graph_lib::Window{
 //Input_object class is used to create and store input objects (picture and tags)
  class Input_obj{   
     public:
-        string location;  
-        /* Address examples:
-            - "C:\Users\Nicholas\Dropbox\School\CSCE121\Project” 
+        string URLstring;  
+        /* examples:
+            - local files only require a filename
             - "http://www.hdwallpapersimages.com/wp-content/uploads/2014/01/Winter-Tiger-Wild-Cat-Images-540x303.jpg" */
         // Parts of a database object:
         string file_name;
-        vector<string> tags; //contains tags(up to 5), taken from input
+        vector<string> new_tags; //contains tags to be saved
+		vector<string> find_tags; //find_tags keeps track of which tags to search for
         Image pic;// picture given by user
-        //Funct
+		// Matt needs an input and output stream
+
         // Functions for taking input:
        void check_ftype(string file_name); // Check type of file/if allowed
        void check_ltype(string location);   // Decide if looking for a file location or URL location
@@ -64,7 +66,7 @@ Class Dispay_Window : Graph_lib::Window{
            //- Allow recovery if incorrect file/url format
        // Function for saving input:
        void add_tags(vector<string> tags_entered); // check how many tags are already entered, and add more if possible
-	   vector<string> search_tags(vector<string> tags_to_find; // searches for tags entered in the search box,returns the relevant list of files
+	   vector<string> search_tags(vector<string> tags_to_find); // searches for tags entered in the search box,returns the relevant list of files
        void save_obj(string disk_ad);  // Check if db_file exist, then save input to database text file
        void create_db(string db_name); // Creates database with file name db_name (txt file)
        

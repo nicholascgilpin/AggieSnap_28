@@ -1,4 +1,4 @@
-#include "univeral.h"
+#include "universal.h"
 
 Display_Window::Display_Window(Point xy, int w, const string& title):Window(xy,w,h,title),
     next_button(Point(x_max()-70,100),70,20,"Next",cb_next),
