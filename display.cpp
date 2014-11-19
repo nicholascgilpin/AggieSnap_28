@@ -1,3 +1,5 @@
+//testing display 
+
 #include "display.h"
 
 Display_Window::Display_Window(Point xy, int w, int h, const string& title):Window(xy,w,h,title),
@@ -13,9 +15,9 @@ Display_Window::Display_Window(Point xy, int w, int h, const string& title):Wind
 		attach(previous_button);
 		attach(home_button);
 		attach(quit_button);
-		//attach(search);
-		//attach(add_url);
-		//attach(add_input);
+		attach(search);
+		attach(add_url);
+		attach(add_input);
 		
    }
    
@@ -27,3 +29,4 @@ void Display_Window::quit()
 	{
 		hide();
 	}
+	
