@@ -47,9 +47,9 @@ Class Dispay_Window : Graph_lib::Window{
 //Input_object class is used to create and store input objects (picture and tags)
  class Input_obj{   
     public:
-        string location;  
-        /* Address examples:
-            - "C:\Users\Nicholas\Dropbox\School\CSCE121\Project” 
+        string URLstring;  
+        /* examples:
+            - local files only require a filename
             - "http://www.hdwallpapersimages.com/wp-content/uploads/2014/01/Winter-Tiger-Wild-Cat-Images-540x303.jpg" */
         // Parts of a database object:
         string file_name;
