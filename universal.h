@@ -52,9 +52,11 @@ class Display_Window : Graph_lib::Window{
             - "http://www.hdwallpapersimages.com/wp-content/uploads/2014/01/Winter-Tiger-Wild-Cat-Images-540x303.jpg" */
         // Parts of a database object:
         string file_name;
-        vector<string> tags; //contains tags(up to 5), taken from input
+        vector<string> new_tags; //contains tags to be saved
+	vector<string> find_tags; //find_tags keeps track of which tags to search for
         Image pic;// picture given by user
-        //Funct
+        // Matt needs an input and output stream
+        
         // Functions for taking input:
        void check_ftype(string file_name); // Check type of file/if allowed
        void check_ltype(string location);   // Decide if looking for a file location or URL location
@@ -63,7 +65,7 @@ class Display_Window : Graph_lib::Window{
            //- Allow recovery if incorrect file/url format
        // Function for saving input:
        void add_tags(vector<string> tags_entered); // check how many tags are already entered, and add more if possible
-	   vector<string> search_tags(vector<string> tags_to_find; // searches for tags entered in the search box,returns the relevant list of files
+	vector<string> search_tags(vector<string> tags_to_find); // searches for tags entered in the search box,returns the relevant list of files
        void save_obj(string disk_ad);  // Check if db_file exist, then save input to database text file
        void create_db(string db_name); // Creates database with file name db_name (txt file)
        
