@@ -15,17 +15,21 @@ istream& operator>>(istream& is, Data_obj& a) //when user uploads a new file
         
         return is;
     }
-
-cout << "Add file/tags: ";
-cin >> //file_name + tags
-// you can use to_lower so that you don't have to put different cases here
-if(/* a URL is present */)
+//-----------------------------------------------------------------------------------------------
+//User will input file and tags
+if(URLstring)//if a URL exists
     {
         system((string("wget ") + URLstring + " –O " + file_name).c_str());
+        ofs.open("file_names.txt", ios_base::out);
+        ofs << file_name << ch1 << tag[0] << ch2 << tag[1] << ch3 << tag[2] << ch4 << tag[3] << ch5 << tag[4] << '\n';
+        ofs.close();
     }
-else if(file_name.substr(file_name.find_last_of(".") + 1) == "jpg" || file_name.substr(file_name.find_last_of(".") + 1) == "jpeg"         || file_name.substr(file_name.find_last_of(".") + 1) == "gif")
+// you can use to_lower so that you don't have to put different cases here
+else if(file_name.substr(file_name.find_last_of(".") + 1) == "jpg" || file_name.substr(file_name.find_last_of(".") + 1) == "jpeg" || file_name.substr(file_name.find_last_of(".") + 1) == "gif")
     {
-        //no error
+        ofs.open("file_names.txt", ios_base::out);
+        ofs << file_name << ch1 << tag[0] << ch2 << tag[1] << ch3 << tag[2] << ch4 << tag[3] << ch5 << tag[4] << '\n';
+        ofs.close();
     }
 else
     {
