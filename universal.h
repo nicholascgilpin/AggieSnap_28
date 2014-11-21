@@ -7,12 +7,17 @@ using namespace Graph_lib;
 
 //Class Display_Window creates the window and allows one to take input, manages the buttons and displays images
 class Display_Window : Graph_lib::Window{ 
-    
-    // Data Members
-    Button next_button; //click to view the next picture
-    Button previous_button; //click to view previous picture
+    // Data members
+	// Constants
+	static const int int_limit = 2147483640; // largest possible int and db size limit
+	static int index = 0; // An index of the current db line number
+	
+    // Buttons
+    Button next_button; 
+    Button previous_button;
     Button home_button; //click to return to viewing all images
-    Button quit_button;//click to exit program
+    Button quit_button;
+	// Boxes
    /* In_box search; //creates the input bar to search tags
     In_box add_url;//allows you to enter urls
     In_box add_input;//allows user to input a new file name and tags
@@ -36,6 +41,7 @@ class Display_Window : Graph_lib::Window{
     public: 
     
     Display_Window(Point xy, int w, int h, const string& title);
+	bool check_index_range(int i);
     
 };  
 
@@ -53,7 +59,7 @@ class Display_Window : Graph_lib::Window{
 	vector<string> find_tags; //find_tags keeps track of which tags to search for
         Image pic;// picture given by user
         // Matt needs an input and output stream
-
+		
         // Functions for taking input:
        void check_ftype(string file_name); // Check type of file/if allowed
        void check_ltype(string location);   // Decide if looking for a file location or URL location
