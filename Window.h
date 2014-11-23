@@ -9,8 +9,6 @@ Walter C. Daugherity		June 10, 2012 and January 9, 2014
 // "Programming -- Principles and Practice Using C++" by Bjarne Stroustrup
 //
 
-#ifndef WINDOW_GUARD
-#define WINDOW_GUARD
 
 #include <FL/Fl.H>
 #include <FL/Fl_Window.H>

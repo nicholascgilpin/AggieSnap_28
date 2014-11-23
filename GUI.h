@@ -4,8 +4,6 @@
 // "Programming -- Principles and Practice Using C++" by Bjarne Stroustrup
 //
 
-#ifndef GUI_GUARD
-#define GUI_GUARD
 
 #include "Window.h"
 #include "Graph.h"
