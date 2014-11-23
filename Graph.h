@@ -185,15 +185,12 @@ private:
     Shape(const Shape&);               // prevent copying
     Shape& operator=(const Shape&);
 };
-
 //------------------------------------------------------------------------------
-
 struct Function : Shape {
     // the function parameters are not stored
     Function(Fct f, double r1, double r2, Point orig,
         int count = 100, double xscale = 25, double yscale = 25);    
 };
-
 //------------------------------------------------------------------------------
 
 struct Line : Shape {            // a Line is a Shape defined by two Points
