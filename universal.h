@@ -10,8 +10,8 @@ class Display_Window : Graph_lib::Window{
 	// Data members
 	// Constants
 	static const int int_limit = 2147483640; // largest possible int and db size limit
-	static int index = 0;					 // An index of the current db line number
-	static bool search_mode = false;		 // true if the program is in search mode
+	static int index;					 // An index of the current db line number
+	static bool search_mode;		 // true if the program is in search mode
 
 	// Buttons
 	Button next_button;
@@ -61,8 +61,8 @@ public:
 	vector<string> find_tags; //find_tags keeps track of which tags to search for
 	Image pic;		// picture given by user
 	string db_filename = "db.agsnap";
-	ofstream ofs(db_filename.c_str(),ios_base::in);		// write to db
-	ifstream ifs(db_filename.c_str(), ios_base::out);	// read db
+	ofstream ofs;		// write to db
+	ifstream ifs;	// read db
 
 	// Functions for taking input:
 	void check_ftype(string file_name); // Check type of file/if allowed
