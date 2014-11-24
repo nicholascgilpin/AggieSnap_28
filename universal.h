@@ -57,7 +57,7 @@ public:
 	// Parts of a database object:
 	string file_name;
 	vector<string> new_tags; //contains tags to be saved
-
+	//tag[0]: family, tag[1]: friends, tag[2]: aggieland, tag[3]: pets, tag[4]: vacation
 	vector<string> find_tags; //find_tags keeps track of which tags to search for
 	Image pic;		// picture given by user
 	string db_filename = "db.agsnap";
