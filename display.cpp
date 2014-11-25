@@ -173,8 +173,46 @@ void Display_Window::quit()
 		hide();
 	}
 
+void Display_Window::home()
+	{
 
+	}
+void Display_Window::tag0()
+	{
 
+	}
+void Display_Window::tag1()
+	{
+
+	}
+void Display_Window::tag2()
+	{
+
+	}
+void Display_Window::tag3()
+	{
+
+	}
+void Display_Window::tag4()
+	{
+
+	}
+void Display_Window::search()
+	{
+
+	}
+void Display_Window::add_tag()
+	{
+
+	}
+void Display_Window::addurl()
+	{
+
+	}
+void Display_Window::add_file()
+	{
+
+	}
 
 
 
