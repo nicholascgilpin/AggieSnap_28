@@ -92,17 +92,10 @@ private:
 	Text message;
 	Button ok_button;
 	
-	void ok;
+	void ok();
 	static void cb_ok(Address, Address);
 }; 
-Error_window::Error_window(Point xy, int w, int h, const string& title)
-	:Window(xy,w,h,title),
-	message(Point(0,0), "Incorrect input! Try again.")
-	{
-		attach(message);
-		attach(ok_button);
-	}
-void //..............add functions later. refer to drill 8 for reference
+
 //Input_object class is used to create and store input objects (picture and tags)
 class Pic_obj
 {
