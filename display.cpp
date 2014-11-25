@@ -5,7 +5,16 @@ Display_Window::Display_Window(Point xy, int w, int h, const string& title):Wind
     quit_button(Point(x_max()-70,0),70,20,"Quit",cb_quit),
 	next_button(Point(x_max()-70,30),70,20,"Next",cb_quit),
     previous_button(Point(x_max()-70,60),70,20,"Previous",cb_quit),
-    home_button(Point(x_max()-70,90),70,20,"Home",cb_quit)
+    home_button(Point(x_max()-70,90),70,20,"Home",cb_quit),
+	family(Point(x_max()-600,480),70,20,"Family",cb_quit),
+	friends(Point(x_max()-520,480),70,20,"Friends",cb_quit),
+	aggieland(Point(x_max()-440,480),70,20,"Aggieland",cb_quit),
+	pets(Point(x_max()-360,480),70,20,"Pets",cb_quit),
+	vacation(Point(x_max()-280,480),70,20,"Vacation",cb_quit),
+	search_button(Point(x_max()-70,0),70,20,"Search",cb_quit),
+	add_tag_button(Point(x_max()-70,0),70,20,"Add",cb_quit),
+	add_url_button(Point(x_max()-70,0),70,20,"Add URL",cb_quit),
+	add_file_button(Point(x_max()-70,0),70,20,"Add File",cb_quit)
 
    //search(Point)x_max()- */
    
@@ -13,10 +22,19 @@ Display_Window::Display_Window(Point xy, int w, int h, const string& title):Wind
 		attach(next_button);
 		attach(previous_button);
 		attach(home_button);
+		attach(family);
+		attach(friends);
+		attach(aggieland);
+		attach(pets);
+		attach(vacation);
+		attach(search_button);
+		attach(add_tag_button);
+		attach(add_url_button);
+		attach(add_file_button);
 		attach(quit_button);
-		attach(search);
-		attach(add_url);
-		attach(add_input);
+		//
+		//attach(add_url);
+		//attach(add_file);
    }
 // Holla back Functions!-----------------------------
 void Display_Window:: cb_quit(Address, Address pw)
