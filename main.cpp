@@ -14,4 +14,6 @@ catch (exception& e) {
 catch (...) {
 	cerr << "Some exception\n";
 	return 2;
+	//testing
+	
 }
