@@ -37,6 +37,7 @@ Display_Window::Display_Window(Point xy, int w, int h, const string& title):Wind
 		//attach(add_file);
    }
 // Holla back Functions!-----------------------------
+   
 void Display_Window:: cb_quit(Address, Address pw)
 	{
 		reference_to<Display_Window>(pw).quit();
@@ -48,6 +49,46 @@ void Display_Window:: cb_next(Address,Address pw)
 void Display_Window:: cb_previous(Address,Address pw)
 	{
 		reference_to<Display_Window>(pw).previous();
+	}
+void Display_Window:: cb_home(Address,Address pw)
+	{
+		reference_to<Display_Window>(pw).home();
+	}
+void Display_Window:: cb_family(Address,Address pw)
+	{
+		reference_to<Display_Window>(pw).tag0();
+	}
+void Display_Window:: cb_friends(Address,Address pw)
+	{
+		reference_to<Display_Window>(pw).tag1();
+	}
+void Display_Window:: cb_aggieland(Address,Address pw)
+	{
+		reference_to<Display_Window>(pw).tag2();
+	}
+void Display_Window:: cb_pets(Address,Address pw)
+	{
+		reference_to<Display_Window>(pw).tag3();
+	}
+void Display_Window:: cb_vacation(Address,Address pw)
+	{
+		reference_to<Display_Window>(pw).tag4();
+	}
+void Display_Window:: cb_search(Address,Address pw)
+	{
+		reference_to<Display_Window>(pw).search();
+	}
+void Display_Window:: cb_add_tag(Address,Address pw)
+	{
+		reference_to<Display_Window>(pw).add_tag();
+	}
+void Display_Window:: cb_add_url(Address,Address pw)
+	{
+		reference_to<Display_Window>(pw).add_url();
+	}
+void Display_Window:: cb_add_file(Address,Address pw)
+	{
+		reference_to<Display_Window>(pw).add_file();
 	}
 // Actual Functions ------------------------------------//
 set_search_mode(bool b)
