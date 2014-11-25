@@ -24,7 +24,6 @@ class Display_Window : Graph_lib::Window{
 	static const int int_limit = 2147483640; // largest possible int and db size limit
 	static int index;					 // An index of the current db line number
 	static bool search_mode;		 // true if the program is in search mode
-
 	// Buttons
 	Button next_button; //click to view the next picture
     Button previous_button; //click to view previous picture
@@ -105,18 +104,21 @@ Error_window::Error_window(Point xy, int w, int h, const string& title)
 	}
 void //..............add functions later. refer to drill 8 for reference
 //Input_object class is used to create and store input objects (picture and tags)
-class Input_obj{
+class Pic_obj
+{
 public:
 	string URLstring;
-	/* examples:
-	- local files only require a filename
-	- "http://www.hdwallpapersimages.com/wp-content/uploads/2014/01/Winter-Tiger-Wild-Cat-Images-540x303.jpg" */
 	// Parts of a database object:
 	string file_name;
 	vector<string> new_tags; //contains tags to be saved
 	//tag[0]: family, tag[1]: friends, tag[2]: aggieland, tag[3]: pets, tag[4]: vacation
-	vector<string> find_tags; //find_tags keeps track of which tags to search for
 	Image pic;		// picture given by user
+};
+// Handles reading and writing from the database---------------//
+class db_access
+{
+public:
+	vector<string> find_tags; //find_tags keeps track of which tags to search for
 	string db_filename = "db.agsnap";
 	ofstream ofs;		// write to db
 	ifstream ifs;	// read db
@@ -127,12 +129,10 @@ public:
 	void add_picture(string location, string filename); // Download File/URL and name it filename
 	//- Allow recovery if Url can’t be downloaded/opened from disk
 	//- Allow recovery if incorrect file/url format
+
 	// Function for saving input:
-	void add_tags(vector<string> tags_entered); // check how many tags are already entered, and add more if possible
-	vector<string> search_tags(vector<string> tags_to_find); // searches for tags entered in the search box,returns the relevant list of files
+	void add_tags(vector<string> tags_entered); // tags entered to be added to the database
+	vector<string> search_tags(); // tags entered in the search box
 	void save_obj(string disk_ad);  // Check if db_file exist, then save input to database text file
 	void create_db(string db_name); // Creates database with file name db_name (txt file)
-
-
-
 };
