@@ -4,6 +4,18 @@
 
 using namespace Graph_lib;
 
+class Intro_Window : Graph_lib::Window{
+
+    //Data Members
+    Button continue_button;
+
+    static void cb_continue(Address,Address);
+        void continue_on();
+
+    public: 
+        Intro_Window(Point xy, int w, int h, const string& title);
+};
+
 
 //Class Display_Window creates the window and allows one to take input, manages the buttons and displays images
 class Display_Window : Graph_lib::Window{
