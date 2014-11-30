@@ -20,20 +20,20 @@
 if (URLstring)//if a URL exists
 {
 	system((string("wget ") + URLstring + " –O " + file_name).c_str());
-	ofs.open("file_names.txt", ios_base::out);
+	ofs.open("Test_db.txt", ios_base::out);
 	ofs << file_name << ',' << tag[0] << ',' << tag[1] << ',' << tag[2] << ',' << tag[3] << ',' << tag[4] << '\n';
 	ofs.close();
 }
 // you can use to_lower so that you don't have to put different cases here
 else if (file_name.substr(file_name.find_last_of(".") + 1) == "jpg" || file_name.substr(file_name.find_last_of(".") + 1) == "jpeg" || file_name.substr(file_name.find_last_of(".") + 1) == "gif")
 {
-	ofs.open("file_names.txt", ios_base::out);
+	ofs.open("Test_db.txt", ios_base::out);
 	ofs << file_name << ',' << tag[0] << ',' << tag[1] << ',' << tag[2] << ',' << tag[3] << ',' << tag[4] << '\n';
 	ofs.close();
 }
 else //wrong file type
 {
-	Error()
+	Error_window(Point(0,0), 500, 200, "Error!");
 }
 save_obj(string filename, bool family, bool friends, bool aggieland, bool pets, bool vacation)
 {
