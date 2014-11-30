@@ -96,6 +96,11 @@ set_search_mode(bool b)
 	Display_Window::search_mode = b;
 	Display_Window::index = 0; // Always reset index when switching modes
 }
+void draw_image(string fname)
+	{
+		attach(new Image(Point(50, 20), fname));
+		redraw();
+	}
 /* check_index_range Corrects index range errors		//
 // I might need to use qualified names for the vars...  */
 bool check_index_range(int i)
@@ -117,39 +122,37 @@ void Display_Window::next()
 		check_index_range(index);
 		if (search_mode) // Searching
 		{
+			if (s_results.empty())
+			{ 
+				return 0; //if vector is empty then exit
+			} 
+			else if (index == 0)
+			{
+				// if index = 0 then we're on the default picture
+				draw_image(s_results[0]);
+				}
+			else (index < 0)
+			{
+				// get picture from search results;
+				draw_image(s_results[index]);
+				}
+		}
+		/*if (!search_mode) // Browsing
+		{
+			check_index_range(index);
 			if (index == 0)
 			{
 				// if index = 0 then we're on the default picture
-				// get the picture from the first spot in vector
-				// attach picture 
-				// redraw
+				// get the picture from the first line of file
+				draw_image(s_results[index]);
 			}
 			if (index < 0)
 			{
-				// get picture from s_vector[i+1];
-				// attach picture 
-				// redraw
-				// increment browser index
+				// picture from the next line of file
+				draw_image(s_results[index]);
 			}
 		}
-		if (!search_mode) // Browsing
-		{
-			if ()
-			{
-				// if index = 0 then we're on the default picture
-				// get the picture from the first line of file/
-				// attach picture 
-				// redraw
-			}
-			if (index < 0)
-			{
-				// get picture from the next line of file
-				// attach picture 
-				// redraw
-				// increment browser index
-			}
-		}
-
+		*/
 		check_index_range(index); // prevent range errors
 		index += 1;			  	  // set to 0 when changing modes!
 		

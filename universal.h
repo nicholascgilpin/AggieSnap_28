@@ -84,7 +84,7 @@ public:
 	Display_Window(Point xy, int w, int h, const string& title);
 	bool check_index_range(int i);	// Corrects index range errors
 	void set_search_mode(bool b);	// Changes the search_mode indicator and display
-
+	void draw_image(string fname); // takes an image and draws it to the screen at Point(50,20)
 };
 
 //Error message window
@@ -114,7 +114,7 @@ class db_access
 {
 public:
 	vector<string> find_tags; //find_tags keeps track of which tags to search for
-	string db_filename = "db.agsnap";
+	string db_filename = "Test_db.txt";
 	ofstream ofs;		// write to db
 	ifstream ifs;	// read db
 
@@ -129,5 +129,7 @@ public:
 	void add_tags(vector<string> tags_entered); // tags entered to be added to the database
 	vector<string> search_tags(); // tags entered in the search box
 	void save_obj(string disk_ad);  // Check if db_file exist, then save input to database text file
+	void load_obj(int line_to_read) // creates a pic_obj from a line in the db
 	void create_db(string db_name); // Creates database with file name db_name (txt file)
+
 };
