@@ -11,13 +11,12 @@ Display_Window::Display_Window(Point xy, int w, int h, const string& title):Wind
 	aggieland(Point(x_max()-440,480),70,20,"Aggieland",cb_aggieland),
 	pets(Point(x_max()-360,480),70,20,"Pets",cb_pets),
 	vacation(Point(x_max()-280,480),70,20,"Vacation",cb_vacation),
-	search_button(Point(x_max()-70,0),70,20,"Search",cb_search),
-	add_tag_button(Point(x_max()-70,0),70,20,"Add",cb_add_tag),
-	add_url_button(Point(x_max()-70,0),70,20,"Add URL",cb_add_url),
-	add_file_button(Point(x_max()-70,0),70,20,"Add File",cb_add_file)
-
-   //search(Point)x_max()- */
-   
+	search_button(Point(x_max()-200,480),70,20,"Search",cb_search),
+	add_tag_button(Point(x_max()-120,480),70,20,"Add",cb_add_tag),
+	add_url_button(Point(x_max()-95,510),70,20,"Add URL",cb_add_url),
+	add_file_button(Point(x_max()-95,540),70,20,"Add File",cb_add_file),
+	input_url(Point(x_max()-600,510),500,20,"Add URL:"),
+	input_file(Point(x_max()-600,540),500,20,"Add File:")
    {
 		attach(next_button);
 		attach(previous_button);
@@ -32,9 +31,9 @@ Display_Window::Display_Window(Point xy, int w, int h, const string& title):Wind
 		attach(add_url_button);
 		attach(add_file_button);
 		attach(quit_button);
-		//
-		//attach(add_url);
-		//attach(add_file);
+		attach(input_url);
+		attach(input_file);
+
    }
 // Holla back Functions!-----------------------------
    
