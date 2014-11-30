@@ -23,14 +23,14 @@ check_file()
 	{
 		system((string("wget ") + URLstring + " –O " + file_name).c_str());
 		ofs.open("Test_db.txt", ios_base::out);
-		ofs << file_name << ',' << tag[0] << ',' << tag[1] << ',' << tag[2] << ',' << tag[3] << ',' << tag[4] << '\n';
+		ofs << file_name << ',' << new_tags[0] << ',' << new_tags[1] << ',' << new_tags[2] << ',' << new_tags[3] << ',' << new_tags[4] << '\n';
 		ofs.close();
 	}
 	// you can use to_lower so that you don't have to put different cases here
 	else if (file_name.substr(file_name.find_last_of(".") + 1) == "jpg" || file_name.substr(file_name.find_last_of(".") + 1) == "jpeg" || file_name.substr(file_name.find_last_of(".") + 1) == "gif")
 	{
 		ofs.open("Test_db.txt", ios_base::out);
-		ofs << file_name << ',' << tag[0] << ',' << tag[1] << ',' << tag[2] << ',' << tag[3] << ',' << tag[4] << '\n';
+		ofs << file_name << ',' << new_tags[0] << ',' << new_tags[1] << ',' << new_tags[2] << ',' << new_tags[3] << ',' << new_tags[4] << '\n';
 		ofs.close();
 	}
 	else //wrong file type
