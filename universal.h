@@ -24,6 +24,8 @@ class Display_Window : Graph_lib::Window{
 	static const int int_limit = 2147483640; // largest possible int and db size limit
 	static int index;					 // An index of the current db line number
 	static bool search_mode;		 // true if the program is in search mode
+	vector<Pic_obj> s_results;		// An array of picture objects
+	vector<strings> tags_to_save;
 	// Buttons
 	Button next_button; //click to view the next picture
     Button previous_button; //click to view previous picture
