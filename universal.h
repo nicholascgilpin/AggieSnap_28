@@ -40,10 +40,9 @@ class Display_Window : Graph_lib::Window{
 	Button add_url_button;
 	Button add_file_button;
     Button quit_button;//click to exit program
-   /*
     In_box add_url;//allows you to enter urls
     In_box add_file;//allows user to input a new file name and tags
-    Out_box mode; //indicates what images are being displayed 
+    /*Out_box mode; //indicates what images are being displayed 
 	Out_box tags_displayed; //displays what tags are showing 
     */
     // Function Declarations
@@ -54,15 +53,15 @@ class Display_Window : Graph_lib::Window{
     static void cb_home(Address,Address);
         void home();
 	static void cb_family(Address,Address);
-        void tag0();
+        void tag();
 	static void cb_friends(Address,Address);
-        void tag1();
+        void tag();
 	static void cb_aggieland(Address,Address);
-        void tag2();
+        void tag();
 	static void cb_pets(Address,Address);
-        void tag3();
+        void tag();
 	static void cb_vacation(Address,Address);
-        void tag4();
+        void tag();
 	static void cb_search(Address,Address);
         void search();
 	static void cb_add_tag(Address,Address);
