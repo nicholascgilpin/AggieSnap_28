@@ -15,7 +15,9 @@ Display_Window::Display_Window(Point xy, int w, int h, const string& title):Wind
 	add_url_button(Point(x_max()-95,510),70,20,"Add URL",cb_add_url),
 	add_file_button(Point(x_max()-95,540),70,20,"Add File",cb_add_file),
 	input_url(Point(x_max()-600,510),500,20,"Add URL:"),
-	input_file(Point(x_max()-600,540),500,20,"Add File:")
+	input_file(Point(x_max()-600,540),500,20,"Add File:"),
+	mode(Point(x_max()-400,20),120,30,"Displaying: "),
+	tags_displayed(Point(x_max()-600,460),120,20,"Active Tags:")
    {
 		attach(next_button);
 		attach(previous_button);
@@ -32,6 +34,8 @@ Display_Window::Display_Window(Point xy, int w, int h, const string& title):Wind
 		attach(quit_button);
 		attach(input_url);
 		attach(input_file);
+		attach(mode);
+		attach(tags_displayed);
 
    }
 // Holla back Functions!-----------------------------
@@ -177,6 +181,13 @@ void Display_Window::quit()
 
 void Display_Window::home()
 	{
+		//Changes the browsing status, indicating that you can see all images
+		ostringstream ss;
+		ss<<"All Images";
+		mode.put(ss.str());
+		ostringstream qq;
+		qq<<"(None)";
+		tags_displayed.put(qq.str());
 
 	}
 void Display_Window::tag0()
@@ -201,7 +212,10 @@ void Display_Window::tag4()
 	}
 void Display_Window::search()
 	{
-
+		//Changes the browsing status to say "Search Results"
+		ostringstream ss;
+		ss<<"Search Results";
+		mode.put(ss.str());
 	}
 void Display_Window::add_tag()
 	{

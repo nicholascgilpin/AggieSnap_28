@@ -42,9 +42,9 @@ class Display_Window : Graph_lib::Window{
     Button quit_button;//click to exit program
     In_box add_url;//allows you to enter urls
     In_box add_file;//allows user to input a new file name and tags
-    /*Out_box mode; //indicates what images are being displayed 
+    Out_box mode; //indicates what images are being displayed 
 	Out_box tags_displayed; //displays what tags are showing 
-    */
+   
     // Function Declarations
     static void cb_next(Address,Address);
         void next();
