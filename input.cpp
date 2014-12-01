@@ -8,7 +8,7 @@ Pic_obj::Pic_obj(string URL, string f_name, vector<string> tags, Image p)
 }
 
 //User will input file and tags
-check_file()
+add_file()
 {
 	if (URLstring)//if a URL exists
 	{
