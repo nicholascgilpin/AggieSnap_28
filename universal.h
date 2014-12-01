@@ -25,7 +25,7 @@ class Display_Window : Graph_lib::Window{
 	static int index;					 // An index of the current db line number
 	static bool search_mode;		 // true if the program is in search mode
 	vector<Pic_obj> s_results;		// An array of picture objects
-	vector<strings> tags_to_save;
+	vector<strings> tag_buttons_pressed;	// Use to save or search for Pic_obj's
 	// Buttons
 	Button next_button; //click to view the next picture
     Button previous_button; //click to view previous picture
