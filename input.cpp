@@ -67,7 +67,7 @@ Pic_obj load_obj(int line_to_read) // create picture object from db line
 	// skip to a line
 	for (int i = 0; i < line_to_read; i++)
 	{
-		getline(cin, raw_line);
+		getline(ist, raw_line);
 	}
 	// parse the rawline
 	ist << '(' << file_name << ',' << tag[0] << ',' << tag[1] << ',' << tag[2] << ',' << tag[3] << ',' << tag[4] << ')' << '\n';
