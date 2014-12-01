@@ -17,7 +17,19 @@ class Intro_Window : Graph_lib::Window{
     public: 
         Intro_Window(Point xy, int w, int h, const string& title);
 };
+//Input_object class is used to create and store input objects (picture and tags)
+class Pic_obj
+{
+	string URLstring;
+	// Parts of a database object:
+	string file_name;
+	vector<string> new_tags; //contains tags to be saved
+	//tag[0]: family, tag[1]: friends, tag[2]: aggieland, tag[3]: pets, tag[4]: vacation
+	Image pic;		// picture given by user
+public:
+	Pic_obj(string file_name, vector<string> new_tags, Image pic);
 
+};
 
 //Class Display_Window creates the window and allows one to take input, manages the buttons and displays images
 class Display_Window : Graph_lib::Window{
@@ -101,19 +113,6 @@ private:
 	static void cb_ok(Address, Address);
 }; 
 
-//Input_object class is used to create and store input objects (picture and tags)
-class Pic_obj
-{
-	string URLstring;
-	// Parts of a database object:
-	string file_name;
-	vector<string> new_tags; //contains tags to be saved
-	//tag[0]: family, tag[1]: friends, tag[2]: aggieland, tag[3]: pets, tag[4]: vacation
-	Image pic;		// picture given by user
-public:
-	Pic_obj(string file_name, vector<string> new_tags, Image pic);
-
-};
 // Handles reading and writing from the database---------------//
 class db_access
 {
@@ -134,7 +133,7 @@ public:
 	void add_tags(vector<string> tags_entered); // tags entered to be added to the database
 	vector<string> search_tags(); // tags entered in the search box
 	void record_obj(string disk_ad);  // Check if db_file exist, then save input to database text file
-	Pic_obj load_obj(int line_to_read) // creates a pic_obj from a line in the db
+	Pic_obj load_obj(int line_to_read); // creates a pic_obj from a line in the db
 	void create_db(string db_name); // Creates database with file name db_name (txt file)
 
 };
