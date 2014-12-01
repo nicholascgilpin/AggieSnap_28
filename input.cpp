@@ -32,7 +32,7 @@ add_file()
 
 // writes line to db from pic_obj
 /*
-save_obj(string filename, bool family, bool friends, bool aggieland, bool pets, bool vacation)
+record_obj(string filename, bool family, bool friends, bool aggieland, bool pets, bool vacation)
 {
 // check if database exist, then save information
 bool temp_to_save[5];
@@ -56,7 +56,7 @@ if (vacation == true)
 {
 temp_to_save[4] = true;
 }
-// save or download picture to disk
+// save or download picture object to database
 }
 */
 Pic_obj load_obj(int line_to_read) // create picture object from db line
@@ -72,4 +72,5 @@ Pic_obj load_obj(int line_to_read) // create picture object from db line
 	// parse the rawline
 	ist << '(' << file_name << ',' << tag[0] << ',' << tag[1] << ',' << tag[2] << ',' << tag[3] << ',' << tag[4] << ')' << '\n';
 	// Pic_Obj constructor
+	return Pic_obj(string file_name, vector<string> tags, Image file_name);
 }
