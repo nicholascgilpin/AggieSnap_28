@@ -1,5 +1,11 @@
 #include "universal.h"
-
+Pic_obj::Pic_obj(string URL, string f_name, vector<string> tags, Image p)
+{
+	URLstring = URL;
+	file_name = f_name;
+	new_tags = tags;
+	pic = p;
+}
 /* istream& operator>>(istream& is, Data_obj& a) //when user adds a new file
 {
 	char ch1, ch2, ch3, ch4, ch5; //commas
@@ -38,6 +44,7 @@ check_file()
 		Error_window(Point(0,0), 500, 200, "Error!");
 	}
 }
+// writes line to db from pic_obj
 save_obj(string filename, bool family, bool friends, bool aggieland, bool pets, bool vacation)
 {
 	// check if database exist, then save information
@@ -64,26 +71,17 @@ save_obj(string filename, bool family, bool friends, bool aggieland, bool pets, 
 	}
 	// save or download picture to disk
 }
-void load_obj(int line_to_read)
+Pic_obj load_obj(int line_to_read) // create picture object from db line
 {
 	ifstream ist(db_filename.c_str());
 	string raw_line;
-	char ch1, ch2, ch3, ch4, ch5; //commas
 	if (!ist) {	cerr << "Error: Database does not exist!"}
 	// skip to a line
 	for (int i = 0; i < line_to_read; i++)
 	{
 		getline(cin, raw_line);
 	}
-
+	// parse the rawline
+	ist << '(' << file_name << ',' << tag[0] << ',' << tag[1] << ',' << tag[2] << ',' << tag[3] << ',' << tag[4] << ')' << '\n';
+	// Pic_Obj constructor
 }
-/* istream& operator>>(istream& is, Data_obj& a) //when user adds a new file
-{
-
-is >> file_name >> ch1 >> tag[0] >> ch2 >> tag[1] >> ch3 >> tag[2] >> ch4 >> tag[3] >> ch5 >> tag[4]; //will work on tag vector later
-if (!is) return is;
-
-
-add = Data_obj(file_name, tag[0], tag[1], tag[2], tag[3], tag[4]); //update entry
-
-return is;

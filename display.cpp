@@ -1,6 +1,5 @@
 
 #include "universal.h"
-// You should clarify these magic numbers. See page 530 of textbook for demo.
 Display_Window::Display_Window(Point xy, int w, int h, const string& title):Window(xy,w,h,title),
  	quit_button(Point(x_max()-70,0),70,20,"Quit",cb_quit),
 	next_button(Point(x_max()-70,30),70,20,"Next",cb_next),
@@ -115,6 +114,7 @@ bool check_index_range(int i)
 			return true; 
 		}
 	}
+/*
 // Reads line of file, displays pic & tags, increments index
 void Display_Window::next()
 	{
@@ -136,7 +136,7 @@ void Display_Window::next()
 				draw_image(s_results[index]);
 				}
 		}
-		/*if (!search_mode) // Browsing
+		if (!search_mode) // Browsing
 		{
 			check_index_range(index);
 			if (index == 0)
@@ -151,7 +151,7 @@ void Display_Window::next()
 				draw_image(s_results[index]);
 			}
 		}
-		*/
+		
 		check_index_range(index); // prevent range errors
 		index += 1;			  	  // set to 0 when changing modes!
 		
@@ -162,7 +162,7 @@ void Display_Window::previous()
 		check_index_range(index);
 		// add code
 	}
-
+*/
 /* Nick's Todo list:
 Browse all pictures.
 When a picture is displayed, so are its tags.  
