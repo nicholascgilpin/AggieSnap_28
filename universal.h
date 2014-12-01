@@ -25,7 +25,9 @@ class Display_Window : Graph_lib::Window{
 	static int index;					 // An index of the current db line number
 	static bool search_mode;		 // true if the program is in search mode
 	vector<Pic_obj> s_results;		// An array of picture objects
-	vector<string> tag_buttons_pressed;	// Use to save or search for Pic_obj's
+
+	vector<string> tag_buttons_pressed;// Use to save or search for Pic_obj's
+
 	// Buttons
 	Button next_button; //click to view the next picture
     Button previous_button; //click to view previous picture
@@ -40,8 +42,8 @@ class Display_Window : Graph_lib::Window{
 	Button add_url_button;
 	Button add_file_button;
     Button quit_button;//click to exit program
-    In_box add_url;//allows you to enter urls
-    In_box add_file;//allows user to input a new file name and tags
+    In_box input_url;//allows you to enter urls
+    In_box input_file;//allows user to input a new file name and tags
     Out_box mode; //indicates what images are being displayed 
 	Out_box tags_displayed; //displays what tags are showing 
    
