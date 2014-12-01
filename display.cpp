@@ -185,9 +185,6 @@ void Display_Window::home()
 		ostringstream ss;
 		ss<<"All Images";
 		mode.put(ss.str());
-		ostringstream qq;
-		qq<<"(None)";
-		tags_displayed.put(qq.str());
 
 	}
 void Display_Window::tag0()
