@@ -1,5 +1,6 @@
 
-#include "universal.h"
+// #include "universal.h"
+// remove this include when adding to the main function
 Display_Window::Display_Window(Point xy, int w, int h, const string& title):Window(xy,w,h,title),
  	quit_button(Point(x_max()-70,0),70,20,"Quit",cb_quit),
 	next_button(Point(x_max()-70,30),70,20,"Next",cb_next),
@@ -93,30 +94,27 @@ void Display_Window:: cb_add_file(Address,Address pw)
 		reference_to<Display_Window>(pw).add_file();
 	}
 // Actual Functions ------------------------------------//
-set_search_mode(bool b)
+void Display_Window::set_search_mode(bool b)
 {
-	Display_Window::search_mode = b;
-	Display_Window::index = 0; // Always reset index when switching modes
+	search_mode = b;
+	index = 0; // Always reset index when switching modes
 }
-void draw_image(string fname)
-	{
-		attach(new Image(Point(50, 20), fname));
-		redraw();
-	}
+/*
+void Display_Window::draw_image(string fname)
+{
+Image *p = new Image(Point(50, 20), fname);
+attach(*p);
+redraw();
+}
+*/
 /* check_index_range Corrects index range errors		//
 // I might need to use qualified names for the vars...  */
-bool check_index_range(int i)
+void Display_Window::check_index_range(int i)
 	{
-		if ((index < 0) || (index > int_limit))
+		if (index < 0)
 		{
 			cerr << "Index ranger error.";
 			index = 0; 
-			return true; // index will always be in range here
-		}
-		else if ((index >= 0) && (index < int_limit))
-		{
-			return true; 
-		}
 	}
 /*
 // Reads line of file, displays pic & tags, increments index
