@@ -30,35 +30,6 @@ add_file()
 	}
 }
 
-// writes line to db from pic_obj
-/*
-record_obj(string filename, bool family, bool friends, bool aggieland, bool pets, bool vacation)
-{
-// check if database exist, then save information
-bool temp_to_save[5];
-if (family == true)
-{
-temp_to_save[0] = true;
-}
-if (friends == true)
-{
-temp_to_save[1] = true;
-}
-if (aggieland == true)
-{
-temp_to_save[2] = true;
-}
-if (pets == true)
-{
-temp_to_save[3] = true;
-}
-if (vacation == true)
-{
-temp_to_save[4] = true;
-}
-// save or download picture object to database
-}
-*/
 Pic_obj load_obj(int line_to_read) // create picture object from db line
 {
 	ifstream ist(db_filename.c_str());

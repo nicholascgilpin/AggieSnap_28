@@ -1,5 +1,4 @@
-
-// #include "universal.h"
+#include "universal.h"
 // remove this include when adding to the main function
 Display_Window::Display_Window(Point xy, int w, int h, const string& title):Window(xy,w,h,title),
  	quit_button(Point(x_max()-70,0),70,20,"Quit",cb_quit),
@@ -114,7 +113,8 @@ void Display_Window::check_index_range(int i)
 		if (index < 0)
 		{
 			cerr << "Index ranger error.";
-			index = 0; 
+			index = 0;
+		}
 	}
 /*
 // Reads line of file, displays pic & tags, increments index
