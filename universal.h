@@ -93,6 +93,8 @@ public:
 	void check_index_range(int i);	// Corrects index range errors
 	void set_search_mode(bool b);	// Changes the search_mode indicator and display
 	void draw_image(string fname); // takes an image and draws it to the screen at Point(50,20)
+	int family, friends, aggieland, pets, vacation; //tags
+	string family_s, friends_s, aggieland_s, pets_s, vacation_s; //human-readable text that is written to index file
 };
 
 //Error message window
