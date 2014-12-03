@@ -201,23 +201,23 @@ void Display_Window::home()
 	}
 void Display_Window::tag0()
 	{
-		family = 1;
+		//family = 1;
 	}
 void Display_Window::tag1()
 	{
-		friends = 1;
+		//friends = 1;
 	}
 void Display_Window::tag2()
 	{
-		aggieland = 1;
+		//aggieland = 1;
 	}
 void Display_Window::tag3()
 	{
-		pets = 1;
+		//pets = 1;
 	}
 void Display_Window::tag4()
 	{
-		vacation = 1;
+		//vacation = 1;
 	}
 void Display_Window::search()
 	{

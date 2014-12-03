@@ -139,4 +139,4 @@ public:
 };
 
 //tags
-int family, friends, aggieland, pets, vacation;
+// int family, friends, aggieland, pets, vacation;
