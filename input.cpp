@@ -14,15 +14,23 @@ add_file()
 	{
 		system((string("wget ") + URLstring + " –O " + file_name).c_str());
 		ofs.open(db_filename, fstream::app);
-		ofs << file_name << ',' << tag[0] << ',' << tag[1] << ',' << tag[2] << ',' << tag[3] << ',' << tag[4] << "\n";
+		ofs << file_name << ',' << family << ',' << friends << ',' << aggieland << ',' << pets << ',' << vacation << "\n";
 		ofs.close();
+		family = 0;
+		friends = 0;
+		aggieland = 0;
+		pets = 0;
 	}
 	// you can use to_lower so that you don't have to put different cases here
 	else if (file_name.substr(file_name.find_last_of(".") + 1) == "jpg" || file_name.substr(file_name.find_last_of(".") + 1) == "jpeg" || file_name.substr(file_name.find_last_of(".") + 1) == "gif" || file_name.substr(file_name.find_last_of(".") + 1) == "JPG" || file_name.substr(file_name.find_last_of(".") + 1) == "JPEG" || file_name.substr(file_name.find_last_of(".") + 1) == "GIF")
 	{
 		ofs.open(db_filename, fstream::app);
-		ofs << file_name << ',' << tag[0] << ',' << tag[1] << ',' << tag[2] << ',' << tag[3] << ',' << tag[4] << "\n";
+		ofs << file_name << ',' << family << ',' << friends << ',' << aggieland << ',' << pets << ',' << vacation << "\n";
 		ofs.close();
+		family = 0;
+		friends = 0;
+		aggieland = 0;
+		pets = 0;
 	}
 	else //wrong file type
 	{

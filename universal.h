@@ -137,3 +137,6 @@ public:
 	void create_db(string db_name); // Creates database with file name db_name (txt file)
 
 };
+
+//tags
+int family, friends, aggieland, pets, vacation;

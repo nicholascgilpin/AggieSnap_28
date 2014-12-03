@@ -93,11 +93,11 @@ void Display_Window:: cb_add_file(Address,Address pw)
 		reference_to<Display_Window>(pw).add_file();
 	}
 // Actual Functions ------------------------------------//
-void Display_Window::set_search_mode(bool b)
+/* void Display_Window::set_search_mode(bool b)
 {
 	search_mode = b;
 	index = 0; // Always reset index when switching modes
-}
+} */
 /*
 void Display_Window::draw_image(string fname)
 {
@@ -108,14 +108,14 @@ redraw();
 */
 /* check_index_range Corrects index range errors		//
 // I might need to use qualified names for the vars...  */
-void Display_Window::check_index_range(int i)
+/* void Display_Window::check_index_range(int i)
 	{
 		if (index < 0)
 		{
 			cerr << "Index ranger error.";
 			index = 0;
 		}
-	}
+	} */
 /*
 // Reads line of file, displays pic & tags, increments index
 void Display_Window::next()
@@ -172,6 +172,17 @@ Provide buttons to see the Next or Previous picture.
 Let buttons also work for search results
 Find pictures with any combination of tags. 
 */
+//------------------THESE ARE TEMPORARY---------------------------------
+void Display_Window::next()
+{
+	hide();
+}
+void Display_Window::previous()
+{
+	hide();
+}
+
+//-----------------------------------------------------------------------
 void Display_Window::quit()
 	{
 		hide();
@@ -187,23 +198,23 @@ void Display_Window::home()
 	}
 void Display_Window::tag0()
 	{
-
+		family = 1;
 	}
 void Display_Window::tag1()
 	{
-
+		friends = 1;
 	}
 void Display_Window::tag2()
 	{
-
+		aggieland = 1;
 	}
 void Display_Window::tag3()
 	{
-
+		pets = 1;
 	}
 void Display_Window::tag4()
 	{
-
+		vacation = 1;
 	}
 void Display_Window::search()
 	{
@@ -230,7 +241,7 @@ int main()
 	{
 		if (H112 != 201401L)error("Error: incorrect std_lib_facilities_4.h version ", H112);
 		Display_Window w(Point(100, 200), 800, 1000, "Aggie Snap!");
-		return 0;
+		return gui;
 	}
 	catch (exception& e)
 	{
