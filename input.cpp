@@ -1,11 +1,45 @@
-/*#include "universal.h"
-Pic_obj::Pic_obj(string URL, string f_name, vector<string> tags, Image p)
+#include "universal.h"
+
+vector<string> Display_Window::f_search(string db_fname, Tag_obj t)
 {
-	URLstring = URL;
-	file_name = f_name;
-	new_tags = tags;
-	pic = p;
+	ifstream ist(db_fname.c_str());
+	string raw_string, pic_name;
+	int str_start, str_end, found;
+	bool contains_tag; // if any of the tags found, push to the results
+	char trash_newlines;
+	bool btag_aray[] = { t.family, t.friends, t.aggieland, t.pets, t.vacation };
+	string tag_aray[] = { "family", "friends", "aggieland", "pets", "vacation" };
+	vector<string> s_results;
+	if (!ist) error("can't open input file", db_fname);
+	// Read entire line,parse each line, stop if end of file is found
+
+	while (true)
+	{
+		if (ist.eof()) break; // exit if end of file
+		getline(ist, raw_string);
+		for (int i = 0; i <= 4; i++)
+		{
+			if (btag_aray[i]){ found = raw_string.find(tag_aray[i]); }
+			else { found = -1; }
+			if (found >= 0) //any tag is present
+			{
+				contains_tag = true;
+				str_start = raw_string.find('(') + 1;
+				str_end = raw_string.find(',') - 1;
+				pic_name = raw_string.substr(str_start, str_end);
+			}
+		}
+		if (contains_tag)
+		{
+			s_results.push_back(pic_name);
+			contains_tag = false;
+			found = -1;
+		}
+	}
+	if ((s_results[0] == "") && (s_results.size() == 1)){ cout << "No matches.\n"; }
+	return s_results;
 }
+/*
 
 //User will input file and tags
 add_file()
@@ -80,19 +114,4 @@ add_file()
 	}
 }
 
-Pic_obj load_obj(int line_to_read) // create picture object from db line
-{
-	ifstream ist(db_filename.c_str());
-	string raw_line;
-	if (!ist) {	cerr << "Error: Database does not exist!"}
-	// skip to a line
-	for (int i = 0; i < line_to_read; i++)
-	{
-		getline(ist, raw_line);
-	}
-	// parse the rawline
-	ist << '(' << file_name << ',' << tag[0] << ',' << tag[1] << ',' << tag[2] << ',' << tag[3] << ',' << tag[4] << ')' << '\n';
-	// Pic_Obj constructor
-	return Pic_obj(string file_name, vector<string> tags, Image file_name);
-}
 */
