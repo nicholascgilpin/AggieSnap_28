@@ -233,7 +233,7 @@ void Display_Window::search()
 			tags_displayed.put(no_match.str());
 		}
 	}
-<<<<<<< HEAD
+
 void Display_Window::draw_image(string fname)
 {
 
