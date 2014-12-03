@@ -100,11 +100,6 @@ void Display_Window:: cb_add_file(Address,Address pw)
 	//index = 0; // Always reset index when switching modes
 } 
 
-	//search_mode = b;
-	//index = 0; // Always reset index when switching modes
-}
-
-
 void Display_Window::draw_image(string fname)
 {
 	/*Image *p = new Image(Point(50, 20), fname);
