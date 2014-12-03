@@ -118,7 +118,6 @@ void Display_Window::check_index_range(int i)
 		}*/
 	} 
 
-	}
 
 /*
 // Reads line of file, displays pic & tags, increments index
