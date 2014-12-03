@@ -1,0 +1,12 @@
+
+Display_window::Tagbutton_x{
+	bool current_tags[] = Tag_obj(family_i, friends_i, aggieland_i, pets_i, vacation_i);
+	string tag_aray[] = { "family", "friends", "aggieland", "pets", "vacation" };
+	for (int k = 0; k < 4; k++)
+	{
+		if (current_tags[k])
+		{
+			active_tags.push(tag_aray[k]) // display to box 
+		}
+	}
+}
