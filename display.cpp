@@ -105,12 +105,6 @@ void Intro_Window::continue_on() //closes the intro window
 	//index = 0; // Always reset index when switching modes
 } 
 
-void Display_Window::draw_image(string fname)
-{
-	/*Image *p = new Image(Point(50, 20), fname);
-	attach(*p);
-	redraw();*/
-}
 // check_index_range Corrects index range errors		//
 // I might need to use qualified names for the vars...  
 void Display_Window::check_index_range(int i)
