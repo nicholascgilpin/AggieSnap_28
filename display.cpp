@@ -17,11 +17,8 @@ Display_Window::Display_Window(Point xy, int w, int h, const string& title):Wind
 	pets(Point(x_max()-360,480),70,20,"Pets",cb_pets),
 	vacation(Point(x_max()-280,480),70,20,"Vacation",cb_vacation),
 	search_button(Point(x_max()-200,480),70,20,"Search",cb_search),
-	add_tag_button(Point(x_max()-120,480),70,20,"Add",cb_add_tag),
-	add_url_button(Point(x_max()-95,510),70,20,"Add URL",cb_add_url),
-	add_file_button(Point(x_max()-95,540),70,20,"Add File",cb_add_file),
-	input_url(Point(x_max()-600,510),500,20,"Add URL:"),
-	input_file(Point(x_max()-600,540),500,20,"Add File:"),
+	add_file_button(Point(x_max()-95,510),70,20,"Add File",cb_add_file),
+	input_file(Point(x_max()-600,510),500,20,"Add File:"),
 	mode(Point(x_max()-400,20),120,30,"Displaying: "),
 	tags_displayed(Point(x_max()-600,460),120,20,"Active Tags:")
    {
@@ -34,8 +31,6 @@ Display_Window::Display_Window(Point xy, int w, int h, const string& title):Wind
 		attach(pets);
 		attach(vacation);
 		attach(search_button);
-		attach(add_tag_button);
-		attach(add_url_button);
 		attach(add_file_button);
 		attach(quit_button);
 		attach(input_url);
@@ -86,19 +81,11 @@ void Display_Window:: cb_search(Address,Address pw)
 	{
 		reference_to<Display_Window>(pw).search();
 	}
-void Display_Window:: cb_add_tag(Address,Address pw)
-	{
-		reference_to<Display_Window>(pw).add_tag();
-	}
-void Display_Window:: cb_add_url(Address,Address pw)
-	{
-		reference_to<Display_Window>(pw).add_url();
-	}
 void Display_Window:: cb_add_file(Address,Address pw)
 	{
 		reference_to<Display_Window>(pw).add_file();
 	}
-void Intro_Window:: cb_continue(Address,Address pw) // goes in intro window
+void Intro_Window:: cb_continue(Address,Address pw)
 	{
 		reference_to<Intro_Window>(pw).continue_on();
 	}
