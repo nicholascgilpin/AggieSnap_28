@@ -278,7 +278,7 @@ void Display_Window::add_file()
 			vacation_s = ' ';
 		}
 		*/
-		if (URLstring[0] == 'h' && URLstring[1] == 't' && URLstring[2] == 't' && URLstring[3] == 'p')//if a URL exists
+		if (URLstring.find("http")> -1)//if a URL exists
 		{
 			system((string("wget ") + URLstring + " –O " + file_name).c_str());
 			ofs.open("db.txt", fstream::app);
