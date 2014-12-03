@@ -1,11 +1,13 @@
 #include "universal.h"
 Intro_Window::Intro_Window(Point xy, int w, int h, const string& title):Window(xy,w,h,title),
 	continue_button(Point(x_max()-440,480),70,20,"Continue",cb_continue),
-	welcome(Point(x_max()-300,30),"Welcome to AggieSnap!")
+	welcome(Point(x_max()-650,50),"Welcome to AggieSnap!"),
+	instructions(Point(x_max()-700,400),"Upload pictures by using the following format: 'filename.jpg, tag1, tag2, etc.' ")
 	{
-
+		welcome.set_font_size(50);
 		attach(continue_button);
 		attach(welcome);
+		attach(instructions);
 	}
 
 Display_Window::Display_Window(Point xy, int w, int h, const string& title):Window(xy,w,h,title),
