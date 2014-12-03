@@ -56,11 +56,11 @@ add_file()
 		ofs.open(db_filename, fstream::app);
 		ofs << file_name << ',' << family_s << ',' << friends_s << ',' << aggieland_s << ',' << pets_s << ',' << vacation_s << "\n";
 		ofs.close();
-		family = 0;
-		friends = 0;
-		aggieland = 0;
-		pets = 0;
-		vacation = 0;
+		family_i = 0;
+		friends_i = 0;
+		aggieland_i = 0;
+		pets_i = 0;
+		vacation_i = 0;
 	}
 	// you can use to_lower so that you don't have to put different cases here
 	else if (file_name.substr(file_name.find_last_of(".") + 1) == "jpg" || file_name.substr(file_name.find_last_of(".") + 1) == "jpeg" || file_name.substr(file_name.find_last_of(".") + 1) == "gif" || file_name.substr(file_name.find_last_of(".") + 1) == "JPG" || file_name.substr(file_name.find_last_of(".") + 1) == "JPEG" || file_name.substr(file_name.find_last_of(".") + 1) == "GIF")
@@ -68,11 +68,11 @@ add_file()
 		ofs.open(db_filename, fstream::app);
 		ofs << file_name << ',' << family_s << ',' << friends_s << ',' << aggieland_s << ',' << pets_s << ',' << vacation_s << "\n";
 		ofs.close();
-		family = 0;
-		friends = 0;
-		aggieland = 0;
-		pets = 0;
-		vacation = 0;
+		family_i = 0;
+		friends_i = 0;
+		aggieland_i = 0;
+		pets_i = 0;
+		vacation_i = 0;
 	}
 	else //wrong file type
 	{
