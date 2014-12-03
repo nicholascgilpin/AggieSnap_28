@@ -177,7 +177,25 @@ Find pictures with any combination of tags.
 //------------------THESE ARE TEMPORARY---------------------------------
 void Display_Window::next()
 {
-	hide();
+	if(index < 0)
+	{
+		hide();
+	}
+	else
+	{
+		index_read.clear();                           //Stores each line of db_filename into vector index_read. Then reads index_read[index] and extracts file name and opens it.
+		ifs.open(db_filename);
+		while(!ifs.eof())
+		{
+			getline(ifs, temp_str);
+			index_read.push_back(temp_str);
+		}
+		ifs.close();
+		
+		char delimiter(',');
+		getline(index_read[index], next_image, delimiter); 
+		draw_image(next_image);
+	}
 }
 void Display_Window::previous()
 {
@@ -236,8 +254,8 @@ void Display_Window::search()
 
 void Display_Window::draw_image(string fname)
 {
-
-	Image *p = new Image(Point(50, 50), fname);
+	detach(*p);
+	p = new Image(Point(50, 50), fname);
 	attach(*p);
 	//virtual FL_Image *copy(int W, int H);
 	redraw();
@@ -245,7 +263,6 @@ void Display_Window::draw_image(string fname)
 
 void Display_Window::add_file()
 	{
-		ofstream ofs;
 		string URLstring = input_url.get_string();
 		string file_name = input_file.get_string();
 		if(family_i==1)
@@ -293,15 +310,18 @@ void Display_Window::add_file()
 			xx<<" ";// clears the tags box
 			tags_displayed.put(xx.str()); // clears the tags displayed
 			system((string("wget -O " + file_name + " " + URLstring).c_str()));
-			ofs.open("db.txt", fstream::app);
-			ofs << file_name << ',' << family_s << ',' << friends_s << ',' << aggieland_s << ',' << pets_s << ',' << vacation_s << "\n";
+			ofs.open(db_filename, fstream::app);
+			ofs << index << file_name << ',' << family_s << ',' << friends_s << ',' << aggieland_s << ',' << pets_s << ',' << vacation_s << "\n";
 			ofs.close();
 			family_i = 0;
 			friends_i = 0;
 			aggieland_i = 0;
 			pets_i = 0;
 			vacation_i = 0;
+			draw_image(file_name);
+			index = index + 1;
 		}
+
 		// you can use to_lower so that you don't have to put different cases here
 		if ((int)URLstring.find("http")>-1)//if a URL exists
 		{
@@ -328,13 +348,15 @@ void Display_Window::add_file()
 			pets_i = 0;
 			vacation_i = 0;
 			draw_image(file_name);
-		}		// you can use to_lower so that you don't have to put different cases here
+			index = index + 1;
+		}
 		else //wrong file type
 		{
 			xx<<"Input failed. Please check your file name";
 			tags_displayed.put(xx.str());
 			//Error_window e(Point(300,300), 500, 200, "Error!");
 
+			//Error_window(Point(0,0), 500, 200, "Error!");
 		}
 	}
 int main()
