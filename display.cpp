@@ -243,7 +243,7 @@ void Display_Window::add_file()
 		}
 		else
 		{
-			family_s = ' ';
+			family_s = " " ;
 		}
 		if(friends_i==0)
 		{
@@ -251,7 +251,7 @@ void Display_Window::add_file()
 		}
 		else
 		{
-			friends_s = ' ';
+			friends_s = " " ;
 		}
 		if(aggieland_i==0)
 		{
@@ -259,7 +259,7 @@ void Display_Window::add_file()
 		}
 		else
 		{
-			aggieland_s = ' ';
+			aggieland_s = " ";
 		}
 		if(pets_i==0)
 		{
@@ -267,7 +267,7 @@ void Display_Window::add_file()
 		}
 		else
 		{
-			pets_s = ' ';
+			pets_s = " " ;
 		}
 		if(vacation_i==0)
 		{
@@ -275,7 +275,7 @@ void Display_Window::add_file()
 		}
 		else
 		{
-			vacation_s = ' ';
+			vacation_s = " ";
 		}
 		*/
 		if (URLstring.find("http")> -1)//if a URL exists
