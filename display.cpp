@@ -1,5 +1,11 @@
 #include "universal.h"
-// remove this include when adding to the main function
+Intro_Window::Intro_Window(Point xy, int w, int h, const string& title):Window(xy,w,h,title),
+	continue_button(Point(x_max()-440,480),70,20,"Continue",cb_continue)
+	
+	{
+		attach(continue_button);
+	}
+
 Display_Window::Display_Window(Point xy, int w, int h, const string& title):Window(xy,w,h,title),
  	quit_button(Point(x_max()-70,0),70,20,"Quit",cb_quit),
 	next_button(Point(x_max()-70,30),70,20,"Next",cb_next),
@@ -92,7 +98,15 @@ void Display_Window:: cb_add_file(Address,Address pw)
 	{
 		reference_to<Display_Window>(pw).add_file();
 	}
+void Intro_Window:: cb_continue(Address,Address pw) // goes in intro window
+	{
+		reference_to<Intro_Window>(pw).continue_on();
+	}
 // Actual Functions ------------------------------------//
+void Intro_Window::continue_on() //connected to intro window
+{
+	hide();
+}
  void Display_Window::set_search_mode(bool b)
 {
 
@@ -243,7 +257,8 @@ int main()
 	try
 	{
 		if (H112 != 201401L)error("Error: incorrect std_lib_facilities_4.h version ", H112);
-		Display_Window w(Point(100, 200), 800, 1000, "Aggie Snap!");
+		Display_Window w(Point(100,100),800,600,"Aggie Snap!");
+		Intro_Window i(Point(100,100),800,600,"Instructions");
 		return gui_main();
 	}
 	catch (exception& e)
