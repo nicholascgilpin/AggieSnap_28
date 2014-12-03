@@ -107,9 +107,9 @@ void Intro_Window::continue_on() //closes the intro window
 
 void Display_Window::draw_image(string fname)
 {
-	/*Image *p = new Image(Point(50, 20), fname);
+	Image *p = new Image(Point(50, 20), fname);
 	attach(*p);
-	redraw();*/
+	redraw();
 }
 // check_index_range Corrects index range errors		//
 // I might need to use qualified names for the vars...  
@@ -278,12 +278,12 @@ void Display_Window::add_file()
 		}
 		if (URLstring.find("http")> -1)//if a URL exists
 		{
-			system((string("wget ") + URLstring + " –O " + file_name).c_str());
+			system((string("wget -O " + file_name + " " + URLstring).c_str()));
 			ofs.open("db.txt", fstream::app);
 			ofs << file_name << ',' << family_s << ',' << friends_s << ',' << aggieland_s << ',' << pets_s << ',' << vacation_s << "\n";
 			ofs.close();
 			
-						family_i = 0;
+			family_i = 0;
 			friends_i = 0;
 			aggieland_i = 0;
 			pets_i = 0;
@@ -296,12 +296,12 @@ void Display_Window::add_file()
 			ofs.open("db.txt", fstream::app);
 			ofs << file_name << ',' << family_s << ',' << friends_s << ',' << aggieland_s << ',' << pets_s << ',' << vacation_s << "\n";
 			ofs.close();
-			
 			family_i = 0;
 			friends_i = 0;
 			aggieland_i = 0;
 			pets_i = 0;
 			vacation_i = 0;
+			draw_image(file_name);
 			
 		}
 		else //wrong file type
