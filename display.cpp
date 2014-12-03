@@ -228,7 +228,7 @@ void Display_Window::search()
 void Display_Window::draw_image(string fname)
 {
 
-	Image *p = new Image(Point(50, 20), fname);
+	Image *p = new Image(Point(50, 50), fname);
 	attach(*p);
 	//virtual FL_Image *copy(int W, int H);
 	redraw();
