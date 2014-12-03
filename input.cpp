@@ -1,5 +1,5 @@
 #include "universal.h"
-Pic_obj::Pic_obj(string URL, string f_name, vector<string> tags, Image p)
+/*Pic_obj::Pic_obj(string URL, string f_name, vector<string> tags, Image p)
 {
 	URLstring = URL;
 	file_name = f_name;
@@ -52,4 +52,4 @@ Pic_obj load_obj(int line_to_read) // create picture object from db line
 	ist << '(' << file_name << ',' << tag[0] << ',' << tag[1] << ',' << tag[2] << ',' << tag[3] << ',' << tag[4] << ')' << '\n';
 	// Pic_Obj constructor
 	return Pic_obj(string file_name, vector<string> tags, Image file_name);
-}
+}*/

@@ -95,9 +95,15 @@ void Display_Window:: cb_add_file(Address,Address pw)
 // Actual Functions ------------------------------------//
 /* void Display_Window::set_search_mode(bool b)
 {
+<<<<<<< Updated upstream
 	search_mode = b;
 	index = 0; // Always reset index when switching modes
 } */
+=======
+	//search_mode = b;
+	//index = 0; // Always reset index when switching modes
+}
+>>>>>>> Stashed changes
 /*
 void Display_Window::draw_image(string fname)
 {
@@ -110,12 +116,17 @@ redraw();
 // I might need to use qualified names for the vars...  */
 /* void Display_Window::check_index_range(int i)
 	{
-		if (index < 0)
+		/*if (index < 0)
 		{
 			cerr << "Index ranger error.";
 			index = 0;
+<<<<<<< Updated upstream
 		}
 	} */
+=======
+		}*/
+	}
+>>>>>>> Stashed changes
 /*
 // Reads line of file, displays pic & tags, increments index
 void Display_Window::next()
