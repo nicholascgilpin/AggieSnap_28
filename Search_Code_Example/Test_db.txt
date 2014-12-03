@@ -1,0 +1,2 @@
+(cat.jpg,friends,,,,)
+(dog.jpg,friends,,,,vacation)

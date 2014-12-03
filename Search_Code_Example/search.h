@@ -7,8 +7,15 @@ struct Tag_obj
 	bool aggieland;
 	bool pets;
 	bool vacation;
-
-	Tag_obj::Tag_obj(bool dfam, bool dfr, bool dag, bool dpt, bool dva)
+	Tag_obj()
+	{
+		family = false;
+		friends = false;
+		aggieland = false;
+		pets = false;
+		vacation = false;
+	}
+	Tag_obj(bool dfam, bool dfr, bool dag, bool dpt, bool dva)
 	{
 		family = dfam;
 		friends = dfr;
@@ -24,8 +31,12 @@ struct Pic_obj
 	// Parts of a database object:
 	string file_name;
 	Tag_obj tags;
-
-	Pic_obj::Pic_obj(string dpname, Tag_obj dt)
+	Pic_obj()
+	{
+		file_name = "db.txt";
+		Tag_obj tags();
+	}
+	Pic_obj(string dpname, Tag_obj dt)
 	{
 		file_name = dpname;
 		tags = dt;
