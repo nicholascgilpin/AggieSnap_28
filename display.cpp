@@ -9,7 +9,6 @@ Intro_Window::Intro_Window(Point xy, int w, int h, const string& title):Window(x
 		attach(welcome);
 		attach(instructions);
 	}
-
 Display_Window::Display_Window(Point xy, int w, int h, const string& title):Window(xy,w,h,title),
  	quit_button(Point(x_max()-70,0),70,20,"Quit",cb_quit),
 	next_button(Point(x_max()-70,30),70,20,"Next",cb_next),
@@ -95,7 +94,7 @@ void Intro_Window:: cb_continue(Address,Address pw)
 		reference_to<Intro_Window>(pw).continue_on();
 	}
 // Actual Functions ------------------------------------//
-void Intro_Window::continue_on() //connected to intro window
+void Intro_Window::continue_on() //closes the intro window
 {
 	hide();
 }

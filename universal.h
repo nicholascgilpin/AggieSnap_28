@@ -10,7 +10,8 @@ class Intro_Window : Graph_lib::Window{
 
     //Data Members
     Button continue_button;
-     Text welcome;
+    Text welcome;
+    Text instructions;
 
     static void cb_continue(Address,Address);
         void continue_on();
