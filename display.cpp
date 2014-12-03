@@ -33,7 +33,6 @@ Display_Window::Display_Window(Point xy, int w, int h, const string& title):Wind
 		attach(search_button);
 		attach(add_file_button);
 		attach(quit_button);
-		attach(input_url);
 		attach(input_file);
 		attach(mode);
 		attach(tags_displayed);
@@ -226,14 +225,6 @@ void Display_Window::search()
 		ostringstream ss;
 		ss<<"Search Results";
 		mode.put(ss.str());
-	}
-void Display_Window::add_tag()
-	{
-
-	}
-void Display_Window::add_url()
-	{
-
 	}
 void Display_Window::add_file()
 	{
