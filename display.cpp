@@ -232,7 +232,77 @@ void Display_Window::search()
 	}
 void Display_Window::add_file()
 	{
-
+		ofstream ofs;
+		string URLstring = input_url.get_string();
+		string file_name = input_file.get_string();
+		if(family_i==0)
+		{
+			family_s = "family";
+		}
+		else
+		{
+			family_s = ' ';
+		}
+		if(friends_i==0)
+		{
+			friends_s = "friends";
+		}
+		else
+		{
+			friends_s = ' ';
+		}
+		if(aggieland_i==0)
+		{
+			aggieland_s = "aggieland";
+		}
+		else
+		{
+			aggieland_s = ' ';
+		}
+		if(pets_i==0)
+		{
+			pets_s = "pets";
+		}
+		else
+		{
+			pets_s = ' ';
+		}
+		if(vacation_i==0)
+		{
+			vacation_s = "vacation";
+		}
+		else
+		{
+			vacation_s = ' ';
+		}
+		if (URLstring[0] == 'h' && URLstring[1] == 't' && URLstring[2] == 't' && URLstring[3] == 'p')//if a URL exists
+		{
+			system((string("wget ") + URLstring + " –O " + file_name).c_str());
+			ofs.open("db.txt", fstream::app);
+			ofs << file_name << ',' << family_s << ',' << friends_s << ',' << aggieland_s << ',' << pets_s << ',' << vacation_s << "\n";
+			ofs.close();
+			family_i = 0;
+			friends_i = 0;
+			aggieland_i = 0;
+			pets_i = 0;
+			vacation_i = 0;
+		}
+		// you can use to_lower so that you don't have to put different cases here
+		else if (file_name.substr(file_name.find_last_of(".") + 1) == "jpg" || file_name.substr(file_name.find_last_of(".") + 1) == "jpeg" || file_name.substr(file_name.find_last_of(".") + 1) == "gif" || file_name.substr(file_name.find_last_of(".") + 1) == "JPG" || file_name.substr(file_name.find_last_of(".") + 1) == "JPEG" || file_name.substr(file_name.find_last_of(".") + 1) == "GIF")
+		{
+			ofs.open("db.txt", fstream::app);
+			ofs << file_name << ',' << family_s << ',' << friends_s << ',' << aggieland_s << ',' << pets_s << ',' << vacation_s << "\n";
+			ofs.close();
+			family_i = 0;
+			friends_i = 0;
+			aggieland_i = 0;
+			pets_i = 0;
+			vacation_i = 0;
+		}
+		else //wrong file type
+		{
+			Error_window(Point(0,0), 500, 200, "Error!");
+		}
 	}
 int main()
 {
