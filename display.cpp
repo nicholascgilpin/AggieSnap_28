@@ -1,9 +1,11 @@
 #include "universal.h"
 Intro_Window::Intro_Window(Point xy, int w, int h, const string& title):Window(xy,w,h,title),
-	continue_button(Point(x_max()-440,480),70,20,"Continue",cb_continue)
-	
+	continue_button(Point(x_max()-440,480),70,20,"Continue",cb_continue),
+	welcome(Point(x_max()-300,30),"Welcome to AggieSnap!")
 	{
+
 		attach(continue_button);
+		attach(welcome);
 	}
 
 Display_Window::Display_Window(Point xy, int w, int h, const string& title):Window(xy,w,h,title),
@@ -18,6 +20,7 @@ Display_Window::Display_Window(Point xy, int w, int h, const string& title):Wind
 	vacation(Point(x_max()-280,480),70,20,"Vacation",cb_vacation),
 	search_button(Point(x_max()-200,480),70,20,"Search",cb_search),
 	add_file_button(Point(x_max()-95,510),70,20,"Add File",cb_add_file),
+	add_url_button(Point(x_max()-125,510),70,20,"Add URl",cb_add_url),
 	input_file(Point(x_max()-600,510),500,20,"Add File:"),
 	mode(Point(x_max()-400,20),120,30,"Displaying: "),
 	tags_displayed(Point(x_max()-600,460),120,20,"Active Tags:")
@@ -32,6 +35,7 @@ Display_Window::Display_Window(Point xy, int w, int h, const string& title):Wind
 		attach(vacation);
 		attach(search_button);
 		attach(add_file_button);
+		attach(add_url_button);
 		attach(quit_button);
 		attach(input_file);
 		attach(mode);
@@ -83,6 +87,10 @@ void Display_Window:: cb_search(Address,Address pw)
 void Display_Window:: cb_add_file(Address,Address pw)
 	{
 		reference_to<Display_Window>(pw).add_file();
+	}
+void Display_Window:: cb_add_url(Address,Address pw)
+	{
+		reference_to<Display_Window>(pw).add_url();
 	}
 void Intro_Window:: cb_continue(Address,Address pw)
 	{
@@ -227,6 +235,10 @@ void Display_Window::search()
 		mode.put(ss.str());
 	}
 void Display_Window::add_file()
+	{
+
+	}
+void Display_Window::add_url()
 	{
 
 	}

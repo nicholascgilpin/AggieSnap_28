@@ -10,6 +10,7 @@ class Intro_Window : Graph_lib::Window{
 
     //Data Members
     Button continue_button;
+     Text welcome;
 
     static void cb_continue(Address,Address);
         void continue_on();
@@ -53,6 +54,7 @@ class Display_Window : Graph_lib::Window{
 	Button vacation;
 	Button search_button;
 	Button add_file_button;
+	Button add_url_button;
     Button quit_button;//click to exit program
     In_box input_file;//allows user to input a new file name and tags
     Out_box mode; //indicates what images are being displayed 
@@ -79,6 +81,8 @@ class Display_Window : Graph_lib::Window{
         void search();
 	static void cb_add_file(Address,Address);
         void add_file();
+    static void cb_add_url(Address,Address);
+        void add_url(); 
     static void cb_quit(Address,Address);
         void quit();
 
