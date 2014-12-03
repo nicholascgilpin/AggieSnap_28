@@ -2,7 +2,7 @@
 Intro_Window::Intro_Window(Point xy, int w, int h, const string& title):Window(xy,w,h,title),
 	continue_button(Point(x_max()-440,480),70,20,"Continue",cb_continue),
 	welcome(Point(x_max()-650,50),"Welcome to AggieSnap!"),
-	instructions(Point(x_max()-700,400),"Upload pictures by using typing in the name of the file and add tags by clicking the tags provided, followed by 'Add'")
+	instructions(Point(x_max()-700,400),"Upload pictures by using the following format: 'filename.jpg, tag1, tag2, etc.' ")
 	{
 		welcome.set_font_size(50);
 		attach(continue_button);
@@ -105,6 +105,12 @@ void Intro_Window::continue_on() //closes the intro window
 	//index = 0; // Always reset index when switching modes
 } 
 
+void Display_Window::draw_image(string fname)
+{
+	/*Image *p = new Image(Point(50, 20), fname);
+	attach(*p);
+	redraw();*/
+}
 // check_index_range Corrects index range errors		//
 // I might need to use qualified names for the vars...  
 void Display_Window::check_index_range(int i)
@@ -224,37 +230,38 @@ void Display_Window::search()
 		ostringstream ss;
 		ss<<"Search Results";
 		mode.put(ss.str());
+		Tag_obj current_tags = Tag_obj(family_i, friends_i, aggieland_i, pets_i, vacation_i);
+		vector<string> results = f_search(db_filename, current_tags);
+		ostringstream no_match;	// Prints message if no matches are found
+		if ((results[0] == "") && (results.size() == 1))
+		{
+			no_match << "No matches";
+			tags_displayed.put(no_match.str());
+		}
 	}
-void Display_Window::draw_image(string fname)
-{
-
-	Image *p = new Image(Point(50, 20), fname);
-	attach(*p);
-	//virtual FL_Image *copy(int W, int H);
-	redraw();
-}
 void Display_Window::add_file()
 	{
 		ofstream ofs;
 		string URLstring = input_url.get_string();
 		string file_name = input_file.get_string();
-		if(family_i==1)
+		/*
+		if(family_i==0)
 		{
 			family_s = "family";
 		}
 		else
 		{
-			family_s = " ";
+			family_s = " " ;
 		}
-		if(friends_i==1)
+		if(friends_i==0)
 		{
 			friends_s = "friends";
 		}
 		else
 		{
-			friends_s = " ";
+			friends_s = " " ;
 		}
-		if(aggieland_i==1)
+		if(aggieland_i==0)
 		{
 			aggieland_s = "aggieland";
 		}
@@ -262,15 +269,15 @@ void Display_Window::add_file()
 		{
 			aggieland_s = " ";
 		}
-		if(pets_i==1)
+		if(pets_i==0)
 		{
 			pets_s = "pets";
 		}
 		else
 		{
-			pets_s = " ";
+			pets_s = " " ;
 		}
-		if(vacation_i==1)
+		if(vacation_i==0)
 		{
 			vacation_s = "vacation";
 		}
@@ -278,31 +285,34 @@ void Display_Window::add_file()
 		{
 			vacation_s = " ";
 		}
-		if ((int)URLstring.find("http")>-1)//if a URL exists
+		*/
+		if (URLstring.find("http")> -1)//if a URL exists
 		{
-			system((string("wget -O " + file_name + " " + URLstring).c_str()));
+			system((string("wget ") + URLstring + " –O " + file_name).c_str());
 			ofs.open("db.txt", fstream::app);
 			ofs << file_name << ',' << family_s << ',' << friends_s << ',' << aggieland_s << ',' << pets_s << ',' << vacation_s << "\n";
 			ofs.close();
-			family_i = 0;
+			/*
+						family_i = 0;
 			friends_i = 0;
 			aggieland_i = 0;
 			pets_i = 0;
 			vacation_i = 0;
+			*/
 		}
 		// you can use to_lower so that you don't have to put different cases here
-	    if (file_name.substr(file_name.find_last_of(".") + 1) == "jpg" || file_name.substr(file_name.find_last_of(".") + 1) == "jpeg" || file_name.substr(file_name.find_last_of(".") + 1) == "gif" || file_name.substr(file_name.find_last_of(".") + 1) == "JPG" || file_name.substr(file_name.find_last_of(".") + 1) == "JPEG" || file_name.substr(file_name.find_last_of(".") + 1) == "GIF" || file_name.substr(file_name.find_last_of(".") + 1) == "png")
+		else if (file_name.substr(file_name.find_last_of(".") + 1) == "jpg" || file_name.substr(file_name.find_last_of(".") + 1) == "jpeg" || file_name.substr(file_name.find_last_of(".") + 1) == "gif" || file_name.substr(file_name.find_last_of(".") + 1) == "JPG" || file_name.substr(file_name.find_last_of(".") + 1) == "JPEG" || file_name.substr(file_name.find_last_of(".") + 1) == "GIF")
 		{
 			ofs.open("db.txt", fstream::app);
-			ofs << '(' << file_name << ',' << family_s << ',' << friends_s << ',' << aggieland_s << ',' << pets_s << ',' << vacation_s << "\n";
+			ofs << file_name << ',' << family_s << ',' << friends_s << ',' << aggieland_s << ',' << pets_s << ',' << vacation_s << "\n";
 			ofs.close();
+			/*
 			family_i = 0;
 			friends_i = 0;
 			aggieland_i = 0;
 			pets_i = 0;
 			vacation_i = 0;
-			draw_image(file_name);
-			//copy(200,200);
+			*/
 		}
 		else //wrong file type
 		{

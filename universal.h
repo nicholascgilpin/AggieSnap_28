@@ -19,20 +19,8 @@ class Intro_Window : Graph_lib::Window{
     public: 
         Intro_Window(Point xy, int w, int h, const string& title);
 };
-//Input_object class is used to create and store input objects (picture and tags)
-class Pic_obj
-{
-	string URLstring;
-	// Parts of a database object:
-	string file_name;
-	vector<string> new_tags; //contains tags to be saved
-	//tag[0]: family, tag[1]: friends, tag[2]: aggieland, tag[3]: pets, tag[4]: vacation
-	Image pic;		// picture given by user
-public:
-	Pic_obj(string file_name, vector<string> new_tags, Image pic);
-
-};
-
+struct Tag_obj;
+struct Pic_obj;
 //Class Display_Window creates the window and allows one to take input, manages the buttons and displays images
 class Display_Window : Graph_lib::Window{
 	// Data members
@@ -40,10 +28,9 @@ class Display_Window : Graph_lib::Window{
 	static const int int_limit = 2147483640; // largest possible int and db size limit
 	static int index;					 // An index of the current db line number
 	bool search_mode;		 // true if the program is in search mode
-	//vector<Pic_obj> s_results;		// An array of picture objects
-
+	vector<string> results;		// An array of picture file names
+	string db_filename = "Test_db.txt";
 	vector<string> tag_buttons_pressed;// Use to save or search for Pic_obj's
-
 	// Buttons
 	Button next_button; //click to view the next picture
     Button previous_button; //click to view previous picture
@@ -93,6 +80,7 @@ class Display_Window : Graph_lib::Window{
 public:
 
 	Display_Window(Point xy, int w, int h, const string& title);
+	vector<string> f_search(string db_fname, Tag_obj t);
 	void check_index_range(int i);	// Corrects index range errors
 	void set_search_mode(bool b);	// Changes the search_mode indicator and display
 	void draw_image(string fname); // takes an image and draws it to the screen at Point(50,20)
@@ -110,13 +98,59 @@ private:
 	void ok();
 	static void cb_ok(Address, Address);
 }; 
+// Tag_obj is used in the search function
+struct Tag_obj
+{
+	//contains tags
+	bool family;
+	bool friends;
+	bool aggieland;
+	bool pets;
+	bool vacation;
+	Tag_obj()
+	{
+		family = false;
+		friends = false;
+		aggieland = false;
+		pets = false;
+		vacation = false;
+	}
+	Tag_obj(bool dfam, bool dfr, bool dag, bool dpt, bool dva)
+	{
+		family = dfam;
+		friends = dfr;
+		aggieland = dag;
+		pets = dpt;
+		vacation = dva;
+	}
+
+};
+//Pic_object class is used in the search function
+struct Pic_obj
+{
+	string URLstring;
+	// Parts of a database object:
+	string file_name;
+	Tag_obj tags;
+	Pic_obj()
+	{
+		file_name = "db.txt";
+		Tag_obj tags();
+	}
+	Pic_obj(string dpname, Tag_obj dt)
+	{
+		file_name = dpname;
+		tags = dt;
+	}
+
+};
 
 // Handles reading and writing from the database---------------//
 class db_access
 {
 public:
 	vector<string> find_tags; //find_tags keeps track of which tags to search for
-	string db_filename = "Test_db.txt";
+	//string db_filename = "Test_db.txt";
 	ofstream ofs;		// write to db
 	ifstream ifs;	// read db
 
@@ -133,6 +167,7 @@ public:
 	void record_obj(string disk_ad);  // Check if db_file exist, then save input to database text file
 	Pic_obj load_obj(int line_to_read); // creates a pic_obj from a line in the db
 	void create_db(string db_name); // Creates database with file name db_name (txt file)
+	
 
 };
 
