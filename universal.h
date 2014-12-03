@@ -29,7 +29,7 @@ class Display_Window : Graph_lib::Window{
 	static int index;					 // An index of the current db line number
 	bool search_mode;		 // true if the program is in search mode
 	vector<string> results;		// An array of picture file names
-	string db_filename = "Test_db.txt";
+	string db_filename = "db.txt";
 	vector<string> tag_buttons_pressed;// Use to save or search for Pic_obj's
 	// Buttons
 	Button next_button; //click to view the next picture

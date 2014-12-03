@@ -1,4 +1,4 @@
-#include "universal.h"
+/*#include "universal.h"
 Error_window::Error_window(Point xy, int w, int h, const string& title)
 	:Window(xy,w,h,title),
 	message(Point(0,100), "Incorrect input! Try again."),
@@ -14,4 +14,4 @@ void Error_window::cb_ok(Address, Address pw)
 void Error_window::ok()
 {
 	hide();
-}
+}*/

@@ -2,7 +2,7 @@
 Intro_Window::Intro_Window(Point xy, int w, int h, const string& title):Window(xy,w,h,title),
 	continue_button(Point(x_max()-440,480),70,20,"Continue",cb_continue),
 	welcome(Point(x_max()-650,50),"Welcome to AggieSnap!"),
-	instructions(Point(x_max()-700,400),"Upload pictures by using the following format: 'filename.jpg, tag1, tag2, etc.' ")
+	instructions(Point(x_max()-700,400),"Upload pictures by putting the name of the image and/or URL, then click add ")
 	{
 		welcome.set_font_size(50);
 		attach(continue_button);
@@ -23,8 +23,8 @@ Display_Window::Display_Window(Point xy, int w, int h, const string& title):Wind
 	add_file_button(Point(x_max()-95,510),70,20,"Add",cb_add_file),
 	input_file(Point(x_max()-600,510),500,20,"Add File:"),
 	input_url(Point(x_max()-600,530),500,20,"Add URL"),
-	mode(Point(x_max()-400,20),120,30,"Displaying: "),
-	tags_displayed(Point(x_max()-600,460),120,20,"Active Tags:")
+	mode(Point(x_max()-400,15),120,30,"Displaying: "),
+	tags_displayed(Point(x_max()-600,460),500,20,"Active Tags:")
    {
 		attach(next_button);
 		attach(previous_button);
@@ -233,7 +233,7 @@ void Display_Window::search()
 			tags_displayed.put(no_match.str());
 		}
 	}
-<<<<<<< HEAD
+
 void Display_Window::draw_image(string fname)
 {
 
@@ -290,6 +290,8 @@ void Display_Window::add_file()
 		}
 		if ((int)URLstring.find("http")>-1)//if a URL exists
 		{
+			xx<<" ";// clears the tags box
+			tags_displayed.put(xx.str()); // clears the tags displayed
 			system((string("wget -O " + file_name + " " + URLstring).c_str()));
 			ofs.open("db.txt", fstream::app);
 			ofs << file_name << ',' << family_s << ',' << friends_s << ',' << aggieland_s << ',' << pets_s << ',' << vacation_s << "\n";
@@ -301,8 +303,22 @@ void Display_Window::add_file()
 			vacation_i = 0;
 		}
 		// you can use to_lower so that you don't have to put different cases here
-	    if (file_name.substr(file_name.find_last_of(".") + 1) == "jpg" || file_name.substr(file_name.find_last_of(".") + 1) == "jpeg" || file_name.substr(file_name.find_last_of(".") + 1) == "gif" || file_name.substr(file_name.find_last_of(".") + 1) == "JPG" || file_name.substr(file_name.find_last_of(".") + 1) == "JPEG" || file_name.substr(file_name.find_last_of(".") + 1) == "GIF" || file_name.substr(file_name.find_last_of(".") + 1) == "png")
+		if ((int)URLstring.find("http")>-1)//if a URL exists
 		{
+			xx<<" ";// clears the tags box
+			tags_displayed.put(xx.str()); // clears the tags displayed
+			system((string("wget -O " + file_name + " " + URLstring).c_str()));
+			family_i = 0;
+			friends_i = 0;
+			aggieland_i = 0;
+			pets_i = 0;
+			vacation_i = 0;
+		}
+		// you can use to_lower so that you don't have to put different cases here
+	    if (file_name.substr(file_name.find_last_of(".") + 1) == "jpg" || file_name.substr(file_name.find_last_of(".") + 1) == "jpeg" || file_name.substr(file_name.find_last_of(".") + 1) == "gif" || file_name.substr(file_name.find_last_of(".") + 1) == "JPG" || file_name.substr(file_name.find_last_of(".") + 1) == "JPEG" || file_name.substr(file_name.find_last_of(".") + 1) == "GIF" )
+		{
+			xx<<" ";// clears the tags box
+			tags_displayed.put(xx.str()); // clears the tags displayed
 			ofs.open("db.txt", fstream::app);
 			ofs << '(' << file_name << ',' << family_s << ',' << friends_s << ',' << aggieland_s << ',' << pets_s << ',' << vacation_s << "\n";
 			ofs.close();
@@ -315,7 +331,10 @@ void Display_Window::add_file()
 		}		// you can use to_lower so that you don't have to put different cases here
 		else //wrong file type
 		{
-			//Error_window(Point(0,0), 500, 200, "Error!");
+			xx<<"Input failed. Please check your file name";
+			tags_displayed.put(xx.str());
+			//Error_window e(Point(300,300), 500, 200, "Error!");
+
 		}
 	}
 int main()
