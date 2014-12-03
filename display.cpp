@@ -93,40 +93,38 @@ void Display_Window:: cb_add_file(Address,Address pw)
 		reference_to<Display_Window>(pw).add_file();
 	}
 // Actual Functions ------------------------------------//
-/* void Display_Window::set_search_mode(bool b)
+ void Display_Window::set_search_mode(bool b)
 {
-<<<<<<< Updated upstream
-	search_mode = b;
-	index = 0; // Always reset index when switching modes
-} */
-=======
+
+	//search_mode = b;
+	//index = 0; // Always reset index when switching modes
+} 
+
 	//search_mode = b;
 	//index = 0; // Always reset index when switching modes
 }
->>>>>>> Stashed changes
-/*
+
+
 void Display_Window::draw_image(string fname)
 {
-Image *p = new Image(Point(50, 20), fname);
-attach(*p);
-redraw();
+	/*Image *p = new Image(Point(50, 20), fname);
+	attach(*p);
+	redraw();*/
 }
-*/
-/* check_index_range Corrects index range errors		//
-// I might need to use qualified names for the vars...  */
-/* void Display_Window::check_index_range(int i)
+// check_index_range Corrects index range errors		//
+// I might need to use qualified names for the vars...  
+void Display_Window::check_index_range(int i)
 	{
 		/*if (index < 0)
 		{
 			cerr << "Index ranger error.";
 			index = 0;
-<<<<<<< Updated upstream
-		}
-	} */
-=======
+
 		}*/
+	} 
+
 	}
->>>>>>> Stashed changes
+
 /*
 // Reads line of file, displays pic & tags, increments index
 void Display_Window::next()
