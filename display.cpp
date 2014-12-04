@@ -41,6 +41,12 @@ Display_Window::Display_Window(Point xy, int w, int h, const string& title):Wind
 		attach(input_url);
 		attach(mode);
 		attach(tags_displayed);
+		// Set all buttons to unpressed state
+		family_i = 0;
+		friends_i = 0;
+		aggieland_i = 0;
+		pets_i = 0;
+		vacation_i = 0;
 
    }
 // Holla back Functions!-----------------------------
@@ -191,45 +197,106 @@ void Display_Window::home()
 		ostringstream ss;
 		ss<<"All Images";
 		mode.put(ss.str());
-
+		search_mode = false;
 	}
+
+void Display_Window::Display_active_tags()
+{
+	int current_tags[] = { family_i, friends_i, aggieland_i, pets_i, vacation_i };
+	string tag_aray[] = { "family", "friends", "aggieland", "pets", "vacation" };
+	string ts_arr[4]; // each string
+	string tags_to_show;
+	for (int k = 0; k <= 4; k++)
+	{
+		if (current_tags[k] > 0)
+		{
+			ts_arr[k] = tag_aray[k] + " ";
+		}
+		ostringstream active_t_stream;
+		tags_to_show = ts_arr[0] + ts_arr[1] + ts_arr[2] + ts_arr[3] + ts_arr[4];
+		active_t_stream << tags_to_show;
+		tags_displayed.put(active_t_stream.str());
+	}
+}
 void Display_Window::tag0()
 	{
-		family_i = 1;
-
-		int current_tags[] = { family_i, friends_i, aggieland_i, pets_i, vacation_i };
-		string tag_aray[] = { "family", "friends", "aggieland", "pets", "vacation" };
-		string ts_arr[4]; // each string
-		string tags_to_show;
-		for (int k = 0; k <= 4; k++)
+		ostringstream clean_box;
+		clean_box << " ";// clears the tags box
+		tags_displayed.put(clean_box.str()); // clears the tags displayed
+		if (family_i == 1)
 		{
-			if (current_tags[k] > 0)
-			{
-				ts_arr[k] = tag_aray[k] + " ";
-			}
-			ostringstream active_t_stream;
-			tags_to_show = ts_arr[0] + ts_arr[1] + ts_arr[2] + ts_arr[3] + ts_arr[4];
-			active_t_stream << tags_to_show;
-			tags_displayed.put(active_t_stream.str());
+			family_i = 0;
 		}
-		
+		if (family_i == 0)
+		{
+			family_i = 1;
+		}
+		Display_active_tags();
 }
 
 void Display_Window::tag1()
 	{
-		friends_i = 1;
+		ostringstream clean_box;
+		clean_box << " ";// clears the tags box
+		tags_displayed.put(clean_box.str()); // clears the tags displayed
+		
+		if (friends_i == 1)
+		{
+			friends_i = 0;
+		}
+		if (friends_i == 0)
+		{
+			friends_i = 1;
+		}
+		Display_active_tags();
 	}
 void Display_Window::tag2()
 	{
-		aggieland_i = 1;
+		ostringstream clean_box;
+		clean_box << " ";// clears the tags box
+		tags_displayed.put(clean_box.str()); // clears the tags displayed
+		
+		if (aggieland_i == 1)
+		{
+			aggieland_i = 0;
+		}
+		if (aggieland_i == 0)
+		{
+			aggieland_i = 1;
+		}
+		Display_active_tags();
 	}
 void Display_Window::tag3()
 	{
-		pets_i = 1;
+		ostringstream clean_box;
+		clean_box << " ";// clears the tags box
+		tags_displayed.put(clean_box.str()); // clears the tags displayed
+		
+		if (pets_i == 1)
+		{
+			pets_i = 0;
+		}
+		if (pets_i == 0)
+		{
+			pets_i = 1;
+		}
+		Display_active_tags();
 	}
 void Display_Window::tag4()
 	{
-		vacation_i = 1;
+		ostringstream clean_box;
+		clean_box << " ";// clears the tags box
+		tags_displayed.put(clean_box.str()); // clears the tags displayed
+		
+		if (vacation_i == 1)
+		{
+			vacation_i = 0;
+		}
+		if (vacation_i == 0)
+		{
+			vacation_i = 1;
+		}
+		Display_active_tags();
 	}
 void Display_Window::search()
 	{
@@ -246,6 +313,7 @@ void Display_Window::search()
 			no_match << "No matches";
 			tags_displayed.put(no_match.str());
 		}
+		search_mode = true;
 	}
 
 void Display_Window::draw_image(string fname)
