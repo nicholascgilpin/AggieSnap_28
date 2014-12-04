@@ -203,6 +203,15 @@ void Display_Window::home()
 		ss<<"All Images";
 		mode.put(ss.str());
 		search_mode = false;
+		ostringstream clean_box;
+		clean_box << " ";// clears the tags box
+		tags_displayed.put(clean_box.str()); // clears the tags displayed
+
+		family_i = 0;
+		friends_i = 0;
+		aggieland_i = 0;
+		pets_i = 0;
+		vacation_i = 0;
 	}
 
 void Display_Window::Display_active_tags()
@@ -210,17 +219,28 @@ void Display_Window::Display_active_tags()
 	int current_tags[] = { family_i, friends_i, aggieland_i, pets_i, vacation_i };
 	string tag_aray[] = { "family", "friends", "aggieland", "pets", "vacation" };
 	string ts_arr[4]; // each string
-	string tags_to_show;
+	string tags_to_show = " ";
+	ostringstream active_t_stream;
+	active_t_stream << tags_to_show;	// clear box
+	tags_displayed.put(active_t_stream.str());
 	for (int k = 0; k <= 4; k++)
 	{
-		if (current_tags[k] > 0)
+		if (current_tags[k] == 1)
 		{
 			ts_arr[k] = tag_aray[k] + " ";
+			
 		}
-		ostringstream active_t_stream;
-		tags_to_show = ts_arr[0] + ts_arr[1] + ts_arr[2] + ts_arr[3] + ts_arr[4];
-		active_t_stream << tags_to_show;
-		tags_displayed.put(active_t_stream.str());
+		if (current_tags[k] == 0)
+		{
+			ts_arr[k] =  " ";
+		}
+	}
+	tags_to_show = ts_arr[0] + ts_arr[1] + ts_arr[2] + ts_arr[3] + ts_arr[4];
+	active_t_stream << tags_to_show;
+	tags_displayed.put(active_t_stream.str());
+	for (int l = 0; l <= 4; l++)
+	{
+		current_tags[l] = 0; // clear array
 	}
 }
 void Display_Window::tag0()
@@ -319,6 +339,15 @@ void Display_Window::search()
 			tags_displayed.put(no_match.str());
 		}
 		search_mode = true;
+		ostringstream clean_box;
+		clean_box << " ";// clears the tags box
+		tags_displayed.put(clean_box.str()); // clears the tags displayed
+
+		family_i = 0;
+		friends_i = 0;
+		aggieland_i = 0;
+		pets_i = 0;
+		vacation_i = 0;
 	}
 
 void Display_Window::draw_image(string fname)
