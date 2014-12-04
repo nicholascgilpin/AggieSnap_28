@@ -177,13 +177,74 @@ Find pictures with any combination of tags.
 //------------------THESE ARE TEMPORARY---------------------------------
 void Display_Window::next()
 {
-	hide();
+	/* string raw_string, pic_name;
+	int str_start, str_end;
+	if (search_mode)
+	{
+	if (search_index < 0)
+	{
+	hide(); //place holder
+	}
+	else
+	{
+	search_index = 0;
+	draw_image(results[search_index]);
+	search_index = search_index + 1;
+	}
+	}
+	else if (!search_mode)
+	{
+	*/
+	if (index < 0)
+	{
+		hide(); //place holder
+	}
+	else
+	{
+		index_read.clear();                           //Stores each line of db_filename into vector index_read. Then reads index_read[index] and extracts file name and opens it.
+		ifs.open(db_filename);
+		while (!ifs.eof())
+		{
+			getline(ifs, raw_string);
+			str_start = raw_string.find('(') + 1; // gets position of the start of the pic_name
+			str_end = raw_string.find(',') - 1;	// gets position of the end of the pic_name
+			pic_name = raw_string.substr(str_start, str_end);
+			index_read.push_back(pic_name);
+		}
+		ifs.close();
+
+		draw_image(index_read[index]);
+		index = index + 1;
+	}
+	//} 
 }
 void Display_Window::previous()
 {
-	hide();
-}
+	string raw_string, pic_name;
+	int str_start, str_end;
 
+	if (index < 0)
+	{
+		hide(); //place holder
+	}
+	else
+	{
+		index = index - 1;
+		index_read.clear();                           //Stores each line of db_filename into vector index_read. Then reads index_read[index] and extracts file name and opens it.
+		ifs.open(db_filename);
+		while (!ifs.eof())
+		{
+			getline(ifs, raw_string);
+			str_start = raw_string.find('(') + 1; // gets position of the start of the pic_name
+			str_end = raw_string.find(',') - 1;	// gets position of the end of the pic_name
+			pic_name = raw_string.substr(str_start, str_end);
+			index_read.push_back(pic_name);
+		}
+		ifs.close();
+
+		draw_image(index_read[index]);
+	}
+}
 //-----------------------------------------------------------------------
 void Display_Window::quit()
 	{
@@ -236,8 +297,8 @@ void Display_Window::search()
 
 void Display_Window::draw_image(string fname)
 {
-
-	Image *p = new Image(Point(50, 50), fname);
+	detach(*p);
+	p = new Image(Point(50, 50), fname);
 	attach(*p);
 	//virtual FL_Image *copy(int W, int H);
 	redraw();
