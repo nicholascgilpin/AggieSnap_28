@@ -153,9 +153,38 @@ int str_start,str_end;
 		{
 			index_read.clear();                           //Stores each line of db_filename into vector index_read. Then reads index_read[index] and extracts file name and opens it.
 			ifs.open(db_filename);
+			string tag_aray[] = { "family", "friends", "aggieland", "pets", "vacation";
 			while(!ifs.eof())
 			{
 				getline(ifs, raw_string);
+				for (int i = 0; i <= 4; i++)
+				{
+					bool found_t = raw_string.find(tag_aray[i]);
+					if (found_t)
+					{
+						if (i == 0)
+						{
+							family_i = 1;
+						}
+						if (i == 1)
+						{
+							friends_i = 1;
+						}
+						if (i == 2)
+						{
+							aggieland_i = 1;
+						}
+						if (i == 3)
+						{
+							pets_i = 1;
+						}
+						if (i == 4)
+						{
+							vacation_i = 1;
+						}
+					}
+				}
+				Display_active_tags();
 				str_start = raw_string.find('(') + 1; // gets position of the start of the pic_name
 				str_end = raw_string.find(',') - 1;	// gets position of the end of the pic_name
 				pic_name = raw_string.substr(str_start, str_end);
