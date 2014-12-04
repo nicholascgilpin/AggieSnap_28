@@ -196,6 +196,25 @@ void Display_Window::home()
 void Display_Window::tag0()
 	{
 		family_i = 1;
+
+		/*		bool current_tags[] = Tag_obj(family_i, friends_i, aggieland_i, pets_i, vacation_i);
+		string tag_aray[] = { "family", "friends", "aggieland", "pets", "vacation" };
+		string ts_arr[4];
+		string tags_to_show;
+		for (int k = 0; k <= 4; k++)
+		{
+		if (current_tags[k])
+		{
+		ts_arr[k] = tag_aray[k];
+		ostringstream active_t_stream;
+
+		active_t_stream << ts_arr[k] <<
+		tags_displayed.put(active_t_stream.str());
+		}
+		}
+		*/
+}
+
 	}
 void Display_Window::tag1()
 	{
@@ -217,11 +236,14 @@ void Display_Window::search()
 	{
 		//Changes the browsing status to say "Search Results"
 		ostringstream ss;
-		ss<<"Search Results";
+		string y = "y";
+		string x = y + "z";
+		ss << x;//"Search Results"
 		mode.put(ss.str());
 		Tag_obj current_tags = Tag_obj(family_i, friends_i, aggieland_i, pets_i, vacation_i);
 		vector<string> results = f_search(db_filename, current_tags);
 		ostringstream no_match;	// Prints message if no matches are found
+
 		if ((results[0] == "") && (results.size() == 1))
 		{
 			no_match << "No matches";
