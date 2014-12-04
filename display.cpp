@@ -107,7 +107,7 @@ void Intro_Window::continue_on() //closes the intro window
 
 // check_index_range Corrects index range errors		//
 // I might need to use qualified names for the vars...  
-void Display_Window::check_index_range(int i)
+void Display_Window::check_index_range()
 	{
 		if (index < 0)
 		{
@@ -116,7 +116,41 @@ void Display_Window::check_index_range(int i)
 
 		}
 	} 
+void Display_Window::next()
+{
+string raw_string,pic_name;
+int str_start,str_end;
 
+		if(index < 0)
+		{
+			check_index_range();
+		}
+		else
+		{
+			index_read.clear();                           //Stores each line of db_filename into vector index_read. Then reads index_read[index] and extracts file name and opens it.
+			ifs.open(db_filename);
+			while(!ifs.eof())
+			{
+				getline(ifs, raw_string);
+				str_start = raw_string.find('(') + 1; // gets position of the start of the pic_name
+				str_end = raw_string.find(',') - 1;	// gets position of the end of the pic_name
+				pic_name = raw_string.substr(str_start, str_end);
+				index_read.push_back(pic_name);
+			}
+			//index = index + 1;
+			if(ifs.eof())
+				{
+					index = 0;
+					//cout<<"end";
+					//index = index + 1;
+				}
+			ifs.close();
+		
+			draw_image(index_read[index]);
+			index = index + 1;
+		}
+	//}	
+}
 void Display_Window::previous()
 {
 	string raw_string,pic_name;
@@ -124,7 +158,7 @@ void Display_Window::previous()
 	
 	if(index < 0)
 		{
-			hide(); //place holder
+			check_index_range();
 		}
 		else
 		{
