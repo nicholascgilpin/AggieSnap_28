@@ -88,7 +88,7 @@ public:
 
 	Display_Window(Point xy, int w, int h, const string& title);
 	vector<string> f_search(string db_fname, Tag_obj t);
-	void check_index_range(int i);	// Corrects index range errors
+	void check_index_range();	// Corrects index range errors
 	void set_search_mode(bool b);	// Changes the search_mode indicator and display
 	void draw_image(string fname); // takes an image and draws it to the screen at Point(50,20)
 	int family_i, friends_i, aggieland_i, pets_i, vacation_i; //tags

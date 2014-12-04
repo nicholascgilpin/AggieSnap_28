@@ -24,7 +24,7 @@ Display_Window::Display_Window(Point xy, int w, int h, const string& title):Wind
 	input_file(Point(x_max()-600,510),500,20,"Add File:"),
 	input_url(Point(x_max()-600,530),500,20,"Add URL"),
 	mode(Point(x_max()-400,20),120,30,"Displaying: "),
-	tags_displayed(Point(x_max()-600,460),120,20,"Active Tags:")
+	tags_displayed(Point(x_max()-600,460),500,20,"Active Tags:")
    {
 		attach(next_button);
 		attach(previous_button);
@@ -197,25 +197,24 @@ void Display_Window::tag0()
 	{
 		family_i = 1;
 
-		/*		bool current_tags[] = Tag_obj(family_i, friends_i, aggieland_i, pets_i, vacation_i);
+		int current_tags[] = { family_i, friends_i, aggieland_i, pets_i, vacation_i };
 		string tag_aray[] = { "family", "friends", "aggieland", "pets", "vacation" };
-		string ts_arr[4];
+		string ts_arr[4]; // each string
 		string tags_to_show;
 		for (int k = 0; k <= 4; k++)
 		{
-		if (current_tags[k])
-		{
-		ts_arr[k] = tag_aray[k];
-		ostringstream active_t_stream;
-
-		active_t_stream << ts_arr[k] <<
-		tags_displayed.put(active_t_stream.str());
+			if (current_tags[k] > 0)
+			{
+				ts_arr[k] = tag_aray[k] + " ";
+			}
+			ostringstream active_t_stream;
+			tags_to_show = ts_arr[0] + ts_arr[1] + ts_arr[2] + ts_arr[3] + ts_arr[4];
+			active_t_stream << tags_to_show;
+			tags_displayed.put(active_t_stream.str());
 		}
-		}
-		*/
+		
 }
 
-	}
 void Display_Window::tag1()
 	{
 		friends_i = 1;
@@ -236,9 +235,7 @@ void Display_Window::search()
 	{
 		//Changes the browsing status to say "Search Results"
 		ostringstream ss;
-		string y = "y";
-		string x = y + "z";
-		ss << x;//"Search Results"
+		ss << "Search Results";
 		mode.put(ss.str());
 		Tag_obj current_tags = Tag_obj(family_i, friends_i, aggieland_i, pets_i, vacation_i);
 		vector<string> results = f_search(db_filename, current_tags);
@@ -263,6 +260,7 @@ void Display_Window::draw_image(string fname)
 void Display_Window::add_file()
 	{
 		ofstream ofs;
+		ostringstream xx;
 		string URLstring = input_url.get_string();
 		string file_name = input_file.get_string();
 		if(family_i==1)
