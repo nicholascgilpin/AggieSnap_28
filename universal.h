@@ -29,12 +29,13 @@ class Display_Window : Graph_lib::Window{
 	ofstream ofs;
 	vector<string> index_read; //used in next()
 	string temp_str; //also used in next()
-	string next_image;
+	//string next_image;
 	// Constants
 	int index = 0;					 // An index of the current db line number
+	int search_index;
 	bool search_mode;		 // true if the program is in search mode
 
-	vector<string> results;		// An array of picture file names
+	vector<string> s_results;		// An array of picture file names
 	string db_filename = "db.txt";
 	vector<string> tag_buttons_pressed;// Use to save or search for Pic_obj's
 	// Buttons
@@ -53,7 +54,7 @@ class Display_Window : Graph_lib::Window{
     In_box input_url;
     Out_box mode; //indicates what images are being displayed 
 	Out_box tags_displayed; //displays what tags are showing 
-   
+    Image *p;
     // Function Declarations
     static void cb_next(Address,Address);
         void next();

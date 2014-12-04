@@ -109,142 +109,42 @@ void Intro_Window::continue_on() //closes the intro window
 // I might need to use qualified names for the vars...  
 void Display_Window::check_index_range(int i)
 	{
-		/*if (index < 0)
+		if (index < 0)
 		{
 			cerr << "Index ranger error.";
 			index = 0;
 
-		}*/
+		}
 	} 
 
-
-/*
-// Reads line of file, displays pic & tags, increments index
-void Display_Window::next()
-	{
-		check_index_range(index);
-		if (search_mode) // Searching
-		{
-			if (s_results.empty())
-			{ 
-				return 0; //if vector is empty then exit
-			} 
-			else if (index == 0)
-			{
-				// if index = 0 then we're on the default picture
-				draw_image(s_results[0]);
-				}
-			else (index < 0)
-			{
-				// get picture from search results;
-				draw_image(s_results[index]);
-				}
-		}
-		if (!search_mode) // Browsing
-		{
-			check_index_range(index);
-			if (index == 0)
-			{
-				// if index = 0 then we're on the default picture
-				// get the picture from the first line of file
-				draw_image(s_results[index]);
-			}
-			if (index < 0)
-			{
-				// picture from the next line of file
-				draw_image(s_results[index]);
-			}
-		}
-		
-		check_index_range(index); // prevent range errors
-		index += 1;			  	  // set to 0 when changing modes!
-		
-	}
-// Reads index-1 line of file, displays pic & tags, decrements index
-void Display_Window::previous()
-	{
-		check_index_range(index);
-		// add code
-	}
-*/
-/* Nick's Todo list:
-Browse all pictures.
-When a picture is displayed, so are its tags.  
-Provide buttons to see the Next or Previous picture.
-Let buttons also work for search results
-Find pictures with any combination of tags. 
-*/
-//------------------THESE ARE TEMPORARY---------------------------------
-void Display_Window::next()
-{
-	/* string raw_string, pic_name;
-	int str_start, str_end;
-	if (search_mode)
-	{
-	if (search_index < 0)
-	{
-	hide(); //place holder
-	}
-	else
-	{
-	search_index = 0;
-	draw_image(results[search_index]);
-	search_index = search_index + 1;
-	}
-	}
-	else if (!search_mode)
-	{
-	*/
-	if (index < 0)
-	{
-		hide(); //place holder
-	}
-	else
-	{
-		index_read.clear();                           //Stores each line of db_filename into vector index_read. Then reads index_read[index] and extracts file name and opens it.
-		ifs.open(db_filename);
-		while (!ifs.eof())
-		{
-			getline(ifs, raw_string);
-			str_start = raw_string.find('(') + 1; // gets position of the start of the pic_name
-			str_end = raw_string.find(',') - 1;	// gets position of the end of the pic_name
-			pic_name = raw_string.substr(str_start, str_end);
-			index_read.push_back(pic_name);
-		}
-		ifs.close();
-
-		draw_image(index_read[index]);
-		index = index + 1;
-	}
-	//} 
-}
 void Display_Window::previous()
 {
-	string raw_string, pic_name;
-	int str_start, str_end;
-
-	if (index < 0)
-	{
-		hide(); //place holder
-	}
-	else
-	{
-		index = index - 1;
-		index_read.clear();                           //Stores each line of db_filename into vector index_read. Then reads index_read[index] and extracts file name and opens it.
-		ifs.open(db_filename);
-		while (!ifs.eof())
+	string raw_string,pic_name;
+	int str_start,str_end;
+	
+	if(index < 0)
 		{
-			getline(ifs, raw_string);
-			str_start = raw_string.find('(') + 1; // gets position of the start of the pic_name
-			str_end = raw_string.find(',') - 1;	// gets position of the end of the pic_name
-			pic_name = raw_string.substr(str_start, str_end);
-			index_read.push_back(pic_name);
+			hide(); //place holder
 		}
-		ifs.close();
-
-		draw_image(index_read[index]);
-	}
+		else
+		{
+			index = index - 1;
+			index_read.clear();                           //Stores each line of db_filename into vector index_read. Then reads index_read[index] and extracts file name and opens it.
+			ifs.open(db_filename);
+			while(!ifs.eof())
+			{
+				getline(ifs, raw_string);
+				str_start = raw_string.find('(') + 1; // gets position of the start of the pic_name
+				str_end = raw_string.find(',') - 1;	// gets position of the end of the pic_name
+				pic_name = raw_string.substr(str_start, str_end);
+				index_read.push_back(pic_name);
+			}
+			ifs.close();
+		
+			draw_image(index_read[index]);
+		}
 }
+
 //-----------------------------------------------------------------------
 void Display_Window::quit()
 	{
@@ -351,10 +251,9 @@ void Display_Window::add_file()
 		}
 		if ((int)URLstring.find("http")>-1)//if a URL exists
 		{
+			xx<<" ";// clears the tags box
+			tags_displayed.put(xx.str()); // clears the tags displayed
 			system((string("wget -O " + file_name + " " + URLstring).c_str()));
-			ofs.open("db.txt", fstream::app);
-			ofs << file_name << ',' << family_s << ',' << friends_s << ',' << aggieland_s << ',' << pets_s << ',' << vacation_s << "\n";
-			ofs.close();
 			family_i = 0;
 			friends_i = 0;
 			aggieland_i = 0;
@@ -362,17 +261,20 @@ void Display_Window::add_file()
 			vacation_i = 0;
 		}
 		// you can use to_lower so that you don't have to put different cases here
-	    if (file_name.substr(file_name.find_last_of(".") + 1) == "jpg" || file_name.substr(file_name.find_last_of(".") + 1) == "jpeg" || file_name.substr(file_name.find_last_of(".") + 1) == "gif" || file_name.substr(file_name.find_last_of(".") + 1) == "JPG" || file_name.substr(file_name.find_last_of(".") + 1) == "JPEG" || file_name.substr(file_name.find_last_of(".") + 1) == "GIF" || file_name.substr(file_name.find_last_of(".") + 1) == "png")
+	    if (file_name.substr(file_name.find_last_of(".") + 1) == "jpg" || file_name.substr(file_name.find_last_of(".") + 1) == "jpeg" || file_name.substr(file_name.find_last_of(".") + 1) == "gif" || file_name.substr(file_name.find_last_of(".") + 1) == "JPG" || file_name.substr(file_name.find_last_of(".") + 1) == "JPEG" || file_name.substr(file_name.find_last_of(".") + 1) == "GIF" )
 		{
-			ofs.open("db.txt", fstream::app);
-			ofs << '(' << file_name << ',' << family_s << ',' << friends_s << ',' << aggieland_s << ',' << pets_s << ',' << vacation_s << "\n";
-			ofs.close();
+			xx<<" ";// clears the tags box
+			ofs.open(db_filename, fstream::app);
+			ofs << index << file_name << ',' << family_s << ',' << friends_s << ',' << aggieland_s << ',' << pets_s << ',' << vacation_s << "\n";
+ 			ofs.close();
 			family_i = 0;
 			friends_i = 0;
 			aggieland_i = 0;
 			pets_i = 0;
 			vacation_i = 0;
 			draw_image(file_name);
+
+			index = index + 1;
 		}		// you can use to_lower so that you don't have to put different cases here
 		else //wrong file type
 		{
