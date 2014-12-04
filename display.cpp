@@ -153,9 +153,38 @@ int str_start,str_end;
 		{
 			index_read.clear();                           //Stores each line of db_filename into vector index_read. Then reads index_read[index] and extracts file name and opens it.
 			ifs.open(db_filename);
+			string tag_aray[] = { "family", "friends", "aggieland", "pets", "vacation" };
 			while(!ifs.eof())
 			{
 				getline(ifs, raw_string);
+				for (int i = 0; i <= 4; i++)
+				{
+					bool found_t = raw_string.find(tag_aray[i]);
+					if (found_t)
+					{
+						if ((i == 0) && (found_t>0))
+						{
+							family_i = 1;
+						}
+						if ((i == 1) && (found_t>0))
+						{
+							friends_i = 1;
+						}
+						if ((i == 2) && (found_t>0))
+						{
+							aggieland_i = 1;
+						}
+						if ((i == 3) && (found_t>0))
+						{
+							pets_i = 1;
+						}
+						if ((i == 4) && (found_t>0))
+						{
+							vacation_i = 1;
+						}
+					}
+				}
+				Display_active_tags();
 				str_start = raw_string.find('(') + 1; // gets position of the start of the pic_name
 				str_end = raw_string.find(',') - 1;	// gets position of the end of the pic_name
 				pic_name = raw_string.substr(str_start, str_end);
@@ -441,7 +470,7 @@ void Display_Window::add_file()
 		{
 			xx<<" ";// clears the tags box
 			ofs.open(db_filename, fstream::app);
-			ofs << index << file_name << ',' << family_s << ',' << friends_s << ',' << aggieland_s << ',' << pets_s << ',' << vacation_s << "\n";
+			ofs << "(" << file_name << ',' << family_s << ',' << friends_s << ',' << aggieland_s << ',' << pets_s << ',' << vacation_s << "\n";
  			ofs.close();
 			family_i = 0;
 			friends_i = 0;
@@ -450,7 +479,7 @@ void Display_Window::add_file()
 			vacation_i = 0;
 			draw_image(file_name);
 
-			index = index + 1;
+		
 		}		// you can use to_lower so that you don't have to put different cases here
 		else //wrong file type
 		{
