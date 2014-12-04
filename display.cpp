@@ -1,110 +1,134 @@
-#include "universal.h"
-Intro_Window::Intro_Window(Point xy, int w, int h, const string& title):Window(xy,w,h,title),
-	continue_button(Point(x_max()-440,480),70,20,"Continue",cb_continue),
-	welcome(Point(x_max()-650,50),"Welcome to AggieSnap!"),
-	instructions(Point(x_max()-700,400),"Upload pictures by using the following format: 'filename.jpg, tag1, tag2, etc.' ")
-	{
-		welcome.set_font_size(50);
-		attach(continue_button);
-		attach(welcome);
-		attach(instructions);
-	}
-Display_Window::Display_Window(Point xy, int w, int h, const string& title):Window(xy,w,h,title),
- 	quit_button(Point(x_max()-70,0),70,20,"Quit",cb_quit),
-	next_button(Point(x_max()-70,30),70,20,"Next",cb_next),
-    previous_button(Point(x_max()-70,60),70,20,"Previous",cb_previous),
-    home_button(Point(x_max()-70,90),70,20,"Home",cb_home),
-	family(Point(x_max()-600,480),70,20,"Family",cb_family),
-	friends(Point(x_max()-520,480),70,20,"Friends",cb_friends),
-	aggieland(Point(x_max()-440,480),70,20,"Aggieland",cb_aggieland),
-	pets(Point(x_max()-360,480),70,20,"Pets",cb_pets),
-	vacation(Point(x_max()-280,480),70,20,"Vacation",cb_vacation),
-	search_button(Point(x_max()-200,480),70,20,"Search",cb_search),
-	add_file_button(Point(x_max()-95,510),70,20,"Add",cb_add_file),
-	input_file(Point(x_max()-600,510),500,20,"Add File:"),
-	input_url(Point(x_max()-600,530),500,20,"Add URL"),
-	mode(Point(x_max()-400,20),120,30,"Displaying: "),
-	tags_displayed(Point(x_max()-600,460),120,20,"Active Tags:")
-   {
-		attach(next_button);
-		attach(previous_button);
-		attach(home_button);
-		attach(family);
-		attach(friends);
-		attach(aggieland);
-		attach(pets);
-		attach(vacation);
-		attach(search_button);
-		attach(add_file_button);
-		attach(quit_button);
-		attach(input_file);
-		attach(input_url);
-		attach(mode);
-		attach(tags_displayed);
+#include "std_lib_facilities_4.h"
+#include "Simple_window.h"
+#include "Window.h"
+#include "Graph.h"
+#include "GUI.h"
 
-   }
-// Holla back Functions!-----------------------------
+using namespace Graph_lib;
+
+class Intro_Window : Graph_lib::Window{
+
+    //Data Members
+    Button continue_button;
+    Text welcome;
+    Text instructions;
+
+    static void cb_continue(Address,Address);
+        void continue_on();
+
+    public: 
+        Intro_Window(Point xy, int w, int h, const string& title);
+};
+struct Tag_obj;
+struct Pic_obj;
+//Class Display_Window creates the window and allows one to take input, manages the buttons and displays images
+class Display_Window : Graph_lib::Window{
+	// Data members
+	ifstream ifs;
+	ofstream ofs;
+	vector<string> index_read; //used in next()
+	string temp_str; //also used in next()
+	// Constants
+	static const int int_limit = 2147483640; // largest possible int and db size limit
+	int index = 0;					 // An index of the current db line number
+	bool search_mode;		 // true if the program is in search mode
+	vector<string> s_results;		// An array of picture file names
+	string db_filename = "Test_db.txt";
+	vector<string> tag_buttons_pressed;// Use to save or search for Pic_obj's
+	// Buttons
+	Button next_button; //click to view the next picture
+    Button previous_button; //click to view previous picture
+    Button home_button; //click to return to viewing all images
+	Button family;
+	Button friends;
+	Button aggieland;
+	Button pets;
+	Button vacation;
+	Button search_button;
+	Button add_file_button;
+    Button quit_button;//click to exit program
+    In_box input_file;//allows user to input a new file name and tags
+    In_box input_url;
+    Out_box mode; //indicates what images are being displayed 
+	Out_box tags_displayed; //displays what tags are showing 
+	Image *p;
    
-void Display_Window:: cb_quit(Address, Address pw)
-	{
-		reference_to<Display_Window>(pw).quit();
-	}
-void Display_Window:: cb_next(Address,Address pw)
-	{
-		reference_to<Display_Window>(pw).next();
-	}
-void Display_Window:: cb_previous(Address,Address pw)
-	{
-		reference_to<Display_Window>(pw).previous();
-	}
-void Display_Window:: cb_home(Address,Address pw)
-	{
-		reference_to<Display_Window>(pw).home();
-	}
-void Display_Window:: cb_family(Address,Address pw)
-	{
-		reference_to<Display_Window>(pw).tag0();
-	}
-void Display_Window:: cb_friends(Address,Address pw)
-	{
-		reference_to<Display_Window>(pw).tag1();
-	}
-void Display_Window:: cb_aggieland(Address,Address pw)
-	{
-		reference_to<Display_Window>(pw).tag2();
-	}
-void Display_Window:: cb_pets(Address,Address pw)
-	{
-		reference_to<Display_Window>(pw).tag3();
-	}
-void Display_Window:: cb_vacation(Address,Address pw)
-	{
-		reference_to<Display_Window>(pw).tag4();
-	}
-void Display_Window:: cb_search(Address,Address pw)
-	{
-		reference_to<Display_Window>(pw).search();
-	}
-void Display_Window:: cb_add_file(Address,Address pw)
-	{
-		reference_to<Display_Window>(pw).add_file();
-	}
-void Intro_Window:: cb_continue(Address,Address pw)
-	{
-		reference_to<Intro_Window>(pw).continue_on();
-	}
-// Actual Functions ------------------------------------//
-void Intro_Window::continue_on() //closes the intro window
-{
-	hide();
-}
- void Display_Window::set_search_mode(bool b)
-{
+    // Function Declarations
+    static void cb_next(Address,Address);
+        void next();
+    static void cb_previous(Address,Address);
+        void previous();
+    static void cb_home(Address,Address);
+        void home();
+	static void cb_family(Address,Address);
+        void tag0();
+	static void cb_friends(Address,Address);
+         void tag1();
+	static void cb_aggieland(Address,Address);
+         void tag2();
+	static void cb_pets(Address,Address);
+         void tag3();
+	static void cb_vacation(Address,Address);
+         void tag4();
+	static void cb_search(Address,Address);
+        void search();
+	static void cb_add_file(Address,Address);
+        void add_file();
+    static void cb_quit(Address,Address);
+        void quit();
 
-	//search_mode = b;
-	//index = 0; // Always reset index when switching modes
-} 
+	/*static void cb_search(Address,Address);
+	void find();
+	static void cd_add(Address, Address);
+	void add();*/
 
+public:
+	Display_Window(Point xy, int w, int h, const string& title);
+	vector<string> f_search(string db_fname, Tag_obj t);
+	void check_index_range(int i);	// Corrects index range errors
+	void set_search_mode(bool b);	// Changes the search_mode indicator and display
+	void draw_image(string fname); // takes an image and draws it to the screen at Point(50,20)
+	int family_i, friends_i, aggieland_i, pets_i, vacation_i; //tags
+	string family_s, friends_s, aggieland_s, pets_s, vacation_s; //human-readable text that is written to index file
+};
+
+//Error message window
+struct Error_window : Graph_lib::Window{
+	Error_window(Point xy, int w, int h, const string& title );
+private:
+	Text message;
+	Button ok_button;
+	
+	void ok();
+	static void cb_ok(Address, Address);
+}; 
+// Tag_obj is used in the search function
+struct Tag_obj
+{
+	//contains tags
+	bool family;
+	bool friends;
+	bool aggieland;
+	bool pets;
+	bool vacation;
+	Tag_obj()
+	{
+		family = false;
+		friends = false;
+		aggieland = false;
+		pets = false;
+		vacation = false;
+	}
+	Tag_obj(bool dfam, bool dfr, bool dag, bool dpt, bool dva)
+	{
+		family = dfam;
+		friends = dfr;
+		aggieland = dag;
+		pets = dpt;
+		vacation = dva;
+	}
+
+};
 // check_index_range Corrects index range errors		//
 // I might need to use qualified names for the vars...  
  
@@ -157,14 +181,6 @@ void Display_Window::next()
 		
 		check_index_range(index); // prevent range errors
 		index += 1;			  	  // set to 0 when changing modes!
-		
-	}
-// Reads index-1 line of file, displays pic & tags, decrements index
-void Display_Window::previous()
-	{
-		check_index_range(index);
-		// add code
-	}
 */
 
 //------------------THESE ARE TEMPORARY---------------------------------
@@ -246,115 +262,31 @@ void Display_Window::search()
 		}
 	}
 
-void Display_Window::draw_image(string fname)
+// Handles reading and writing from the database---------------//
+class db_access
 {
+public:
+	vector<string> find_tags; //find_tags keeps track of which tags to search for
+	//string db_filename = "Test_db.txt";
+	ofstream ofs;		// write to db
+	ifstream ifs;	// read db
 
-	Image *p = new Image(Point(50, 50), fname);
-	attach(*p);
-	//virtual FL_Image *copy(int W, int H);
-	redraw();
-}
+	// Functions for taking input:
+	void check_ftype(string file_name); // Check type of file/if allowed
+	void check_ltype(string location);   // Decide if looking for a file location or URL location
+	void add_picture(string location, string filename); // Download File/URL and name it filename
+	//- Allow recovery if Url can’t be downloaded/opened from disk
+	//- Allow recovery if incorrect file/url format
 
-void Display_Window::add_file()
-	{
-		ofstream ofs;
-		string URLstring = input_url.get_string();
-		string file_name = input_file.get_string();
-		if(family_i==1)
-		{
-			family_s = "family";
-		}
-		else
-		{
-			family_s = " ";
-		}
-		if(friends_i==1)
-		{
-			friends_s = "friends";
-		}
-		else
-		{
-			friends_s = " ";
-		}
-		if(aggieland_i==1)
-		{
-			aggieland_s = "aggieland";
-		}
-		else
-		{
-			aggieland_s = " ";
-		}
-		if(pets_i==1)
-		{
-			pets_s = "pets";
-		}
-		else
-		{
-			pets_s = " ";
-		}
-		if(vacation_i==1)
-		{
-			vacation_s = "vacation";
-		}
-		else
-		{
-			vacation_s = " ";
-		}
-		if ((int)URLstring.find("http")>-1)//if a URL exists
-		{
-			system((string("wget -O " + file_name + " " + URLstring).c_str()));
-			ofs.open("db.txt", fstream::app);
-			ofs << file_name << ',' << family_s << ',' << friends_s << ',' << aggieland_s << ',' << pets_s << ',' << vacation_s << "\n";
-			ofs.close();
-			family_i = 0;
-			friends_i = 0;
-			aggieland_i = 0;
-			pets_i = 0;
-			vacation_i = 0;
-		}
-		// you can use to_lower so that you don't have to put different cases here
-	    if (file_name.substr(file_name.find_last_of(".") + 1) == "jpg" || file_name.substr(file_name.find_last_of(".") + 1) == "jpeg" || file_name.substr(file_name.find_last_of(".") + 1) == "gif" || file_name.substr(file_name.find_last_of(".") + 1) == "JPG" || file_name.substr(file_name.find_last_of(".") + 1) == "JPEG" || file_name.substr(file_name.find_last_of(".") + 1) == "GIF" || file_name.substr(file_name.find_last_of(".") + 1) == "png")
-		{
-			ofs.open("db.txt", fstream::app);
-			ofs << '(' << file_name << ',' << family_s << ',' << friends_s << ',' << aggieland_s << ',' << pets_s << ',' << vacation_s << "\n";
-			ofs.close();
-			family_i = 0;
-			friends_i = 0;
-			aggieland_i = 0;
-			pets_i = 0;
-			vacation_i = 0;
-			draw_image(file_name);
-		}		// you can use to_lower so that you don't have to put different cases here
-		else //wrong file type
-		{
-			//Error_window(Point(0,0), 500, 200, "Error!");
-		}
-	}
-int main()
-{
-	try
-	{
-		if (H112 != 201401L)error("Error: incorrect std_lib_facilities_4.h version ", H112);
-		Display_Window w(Point(100,100),800,600,"Aggie Snap!");
-		Intro_Window i(Point(100,100),800,600,"Instructions");
-		return gui_main();
-	}
-	catch (exception& e)
-	{
-		cerr << "exception: " << e.what() << '\n';
-		return 1;
-	}
-	catch (...)
-	{
-		cerr << "Some exception\n";
-		return 2;
-		//testing
+	// Function for saving input:
+	void add_tags(vector<string> tags_entered); // tags entered to be added to the database
+	vector<string> search_tags(); // tags entered in the search box
+	void record_obj(string disk_ad);  // Check if db_file exist, then save input to database text file
+	Pic_obj load_obj(int line_to_read); // creates a pic_obj from a line in the db
+	void create_db(string db_name); // Creates database with file name db_name (txt file)
+	
 
-	}
-}
+};
 
-
-
-
-
-
+//tags
+// int family, friends, aggieland, pets, vacation;
