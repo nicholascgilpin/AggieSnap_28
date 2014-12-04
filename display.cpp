@@ -96,42 +96,28 @@ void Intro_Window:: cb_continue(Address,Address pw)
 // Actual Functions ------------------------------------//
 void Intro_Window::continue_on() //closes the intro window
 {
-	//contains tags
-	bool family;
-	bool friends;
-	bool aggieland;
-	bool pets;
-	bool vacation;
-	Tag_obj()
-	{
-		family = false;
-		friends = false;
-		aggieland = false;
-		pets = false;
-		vacation = false;
-	}
-	Tag_obj(bool dfam, bool dfr, bool dag, bool dpt, bool dva)
-	{
-		family = dfam;
-		friends = dfr;
-		aggieland = dag;
-		pets = dpt;
-		vacation = dva;
-	}
+	hide();
+}
+ void Display_Window::set_search_mode(bool b)
+{
 
-};
+	//search_mode = b;
+	//index = 0; // Always reset index when switching modes
+} 
+
 // check_index_range Corrects index range errors		//
 // I might need to use qualified names for the vars...  
- 
- void Display_Window::check_index_range(int i)
+void Display_Window::check_index_range(int i)
 	{
-		if (index < 0)
+		/*if (index < 0)
 		{
-			cerr << "Index range error.";
+			cerr << "Index ranger error.";
 			index = 0;
-		}
+
+		}*/
 	} 
- 
+
+
 /*
 // Reads line of file, displays pic & tags, increments index
 void Display_Window::next()
@@ -172,8 +158,22 @@ void Display_Window::next()
 		
 		check_index_range(index); // prevent range errors
 		index += 1;			  	  // set to 0 when changing modes!
+		
+	}
+// Reads index-1 line of file, displays pic & tags, decrements index
+void Display_Window::previous()
+	{
+		check_index_range(index);
+		// add code
+	}
 */
-
+/* Nick's Todo list:
+Browse all pictures.
+When a picture is displayed, so are its tags.  
+Provide buttons to see the Next or Previous picture.
+Let buttons also work for search results
+Find pictures with any combination of tags. 
+*/
 //------------------THESE ARE TEMPORARY---------------------------------
 void Display_Window::next()
 {
@@ -182,105 +182,6 @@ void Display_Window::next()
 void Display_Window::previous()
 {
 	hide();
-}
-
-//-----------------------------------------------------------------------
-void Display_Window::quit()
-	{
-		hide();
-	}
-
-void Display_Window::home()
-	{
-	hide();
-}
- void Display_Window::set_search_mode(bool b)
-{
-
-	//search_mode = b;
-	//index = 0; // Always reset index when switching modes
-} 
-
-// check_index_range Corrects index range errors		//
-// I might need to use qualified names for the vars...  
-void Display_Window::check_index_range(int i)
-	{
-		/*if (index < 0)
-		{
-			cerr << "Index ranger error.";
-			index = 0;
-
-		}*/
-	} 
-
-void Display_Window::next()
-{
-string raw_string,pic_name;
-int str_start,str_end;
-	/* if(search_mode)
-	{
-		if(search_index < 0)
-		{
-			hide(); //place holder
-		}
-		else
-		{
-			search_index = 0;
-			draw_image(results[search_index]);
-			search_index = search_index + 1;
-		}
-	}
-	else if(!search_mode)
-	{ */
-		if(index < 0)
-		{
-			hide(); //place holder
-		}
-		else
-		{
-			index_read.clear();                           //Stores each line of db_filename into vector index_read. Then reads index_read[index] and extracts file name and opens it.
-			ifs.open(db_filename);
-			while(!ifs.eof())
-			{
-				getline(ifs, raw_string);
-				str_start = raw_string.find('(') + 1; // gets position of the start of the pic_name
-				str_end = raw_string.find(',') - 1;	// gets position of the end of the pic_name
-				pic_name = raw_string.substr(str_start, str_end);
-				index_read.push_back(pic_name);
-			}
-			ifs.close();
-		
-			draw_image(index_read[index]);
-			index = index + 1;
-		}
-	//}	
-}
-void Display_Window::previous()
-{
-	string raw_string,pic_name;
-	int str_start,str_end;
-	
-	if(index < 0)
-		{
-			hide(); //place holder
-		}
-		else
-		{
-			index = index - 1;
-			index_read.clear();                           //Stores each line of db_filename into vector index_read. Then reads index_read[index] and extracts file name and opens it.
-			ifs.open(db_filename);
-			while(!ifs.eof())
-			{
-				getline(ifs, raw_string);
-				str_start = raw_string.find('(') + 1; // gets position of the start of the pic_name
-				str_end = raw_string.find(',') - 1;	// gets position of the end of the pic_name
-				pic_name = raw_string.substr(str_start, str_end);
-				index_read.push_back(pic_name);
-			}
-			ifs.close();
-		
-			draw_image(index_read[index]);
-		}
 }
 
 //-----------------------------------------------------------------------
@@ -324,59 +225,6 @@ void Display_Window::search()
 		ss<<"Search Results";
 		mode.put(ss.str());
 		Tag_obj current_tags = Tag_obj(family_i, friends_i, aggieland_i, pets_i, vacation_i);
-		results = f_search(db_filename, current_tags);
-		ostringstream no_match;	// Prints message if no matches are found
-		if ((results[0] == "") && (results.size() == 1))
-		{
-			no_match << "No matches";
-			tags_displayed.put(no_match.str());
-		}
-	}
-void Display_Window::tag0()
-	{
-		family_i = 1;
-	}
-void Display_Window::tag1()
-	{
-		friends_i = 1;
-		/*
-				bool current_tags[] = Tag_obj(family_i, friends_i, aggieland_i, pets_i, vacation_i);
-		string tag_aray[] = { "family", "friends", "aggieland", "pets", "vacation" };
-		string ts_arr[4];
-		string tags_to_show;
-		for (int k = 0; k <= 4; k++)
-		{
-			if (current_tags[k])
-			{
-				ts_arr[k] = tag_aray[k];
-				ostringstream active_t_stream;	
-				active_t_stream << ts_arr[k] <<
-				tags_displayed.put(active_t_stream.str());
-
-				}
-		}
-		*/
-
-	}
-void Display_Window::tag2()
-	{
-		aggieland_i = 1;
-	}
-void Display_Window::tag3()
-	{
-		pets_i = 1;
-	}
-void Display_Window::tag4()
-	{
-		vacation_i = 1;
-	}
-void Display_Window::search()
-	{
-		//Changes the browsing status to say "Search Results"
-		ostringstream ss;
-		ss<<"Search Results";
-		mode.put(ss.str());
-		Tag_obj current_tags = Tag_obj(family_i, friends_i, aggieland_i, pets_i, vacation_i);
 		vector<string> results = f_search(db_filename, current_tags);
 		ostringstream no_match;	// Prints message if no matches are found
 		if ((results[0] == "") && (results.size() == 1))
@@ -388,8 +236,8 @@ void Display_Window::search()
 
 void Display_Window::draw_image(string fname)
 {
-	detach(*p);
-	p = new Image(Point(50, 50), fname);
+
+	Image *p = new Image(Point(50, 50), fname);
 	attach(*p);
 	//virtual FL_Image *copy(int W, int H);
 	redraw();
@@ -397,6 +245,7 @@ void Display_Window::draw_image(string fname)
 
 void Display_Window::add_file()
 	{
+		ofstream ofs;
 		string URLstring = input_url.get_string();
 		string file_name = input_file.get_string();
 		if(family_i==1)
@@ -442,7 +291,7 @@ void Display_Window::add_file()
 		if ((int)URLstring.find("http")>-1)//if a URL exists
 		{
 			system((string("wget -O " + file_name + " " + URLstring).c_str()));
-			ofs.open(db_filename, fstream::app);
+			ofs.open("db.txt", fstream::app);
 			ofs << file_name << ',' << family_s << ',' << friends_s << ',' << aggieland_s << ',' << pets_s << ',' << vacation_s << "\n";
 			ofs.close();
 			family_i = 0;
@@ -450,12 +299,12 @@ void Display_Window::add_file()
 			aggieland_i = 0;
 			pets_i = 0;
 			vacation_i = 0;
-			draw_image(file_name);
 		}
+		// you can use to_lower so that you don't have to put different cases here
 	    if (file_name.substr(file_name.find_last_of(".") + 1) == "jpg" || file_name.substr(file_name.find_last_of(".") + 1) == "jpeg" || file_name.substr(file_name.find_last_of(".") + 1) == "gif" || file_name.substr(file_name.find_last_of(".") + 1) == "JPG" || file_name.substr(file_name.find_last_of(".") + 1) == "JPEG" || file_name.substr(file_name.find_last_of(".") + 1) == "GIF" || file_name.substr(file_name.find_last_of(".") + 1) == "png")
 		{
-			ofs.open(db_filename, fstream::app);
-			ofs << file_name << ',' << family_s << ',' << friends_s << ',' << aggieland_s << ',' << pets_s << ',' << vacation_s << "\n";
+			ofs.open("db.txt", fstream::app);
+			ofs << '(' << file_name << ',' << family_s << ',' << friends_s << ',' << aggieland_s << ',' << pets_s << ',' << vacation_s << "\n";
 			ofs.close();
 			family_i = 0;
 			friends_i = 0;
@@ -463,10 +312,10 @@ void Display_Window::add_file()
 			pets_i = 0;
 			vacation_i = 0;
 			draw_image(file_name);
-		}
+		}		// you can use to_lower so that you don't have to put different cases here
 		else //wrong file type
 		{
-			Error_window(Point(0,0), 500, 200, "Error!");
+			//Error_window(Point(0,0), 500, 200, "Error!");
 		}
 	}
 int main()
