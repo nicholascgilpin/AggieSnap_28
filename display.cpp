@@ -441,7 +441,7 @@ void Display_Window::add_file()
 		{
 			xx<<" ";// clears the tags box
 			ofs.open(db_filename, fstream::app);
-			ofs << index << file_name << ',' << family_s << ',' << friends_s << ',' << aggieland_s << ',' << pets_s << ',' << vacation_s << "\n";
+			ofs << "(" << file_name << ',' << family_s << ',' << friends_s << ',' << aggieland_s << ',' << pets_s << ',' << vacation_s << "\n";
  			ofs.close();
 			family_i = 0;
 			friends_i = 0;
@@ -450,7 +450,7 @@ void Display_Window::add_file()
 			vacation_i = 0;
 			draw_image(file_name);
 
-			index = index + 1;
+		
 		}		// you can use to_lower so that you don't have to put different cases here
 		else //wrong file type
 		{
