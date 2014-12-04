@@ -12,6 +12,9 @@ class Intro_Window : Graph_lib::Window{
     Button continue_button;
     Text welcome;
     Text instructions;
+    Text tag_instructions;
+    Text next_instructions;
+
 
     static void cb_continue(Address,Address);
         void continue_on();
