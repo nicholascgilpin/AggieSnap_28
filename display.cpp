@@ -2,7 +2,7 @@
 Intro_Window::Intro_Window(Point xy, int w, int h, const string& title):Window(xy,w,h,title),
 	continue_button(Point(x_max()-440,480),70,20,"Continue",cb_continue),
 	welcome(Point(x_max()-650,80),"Welcome to AggieSnap!"),
-	instructions(Point(x_max()-750,200),"Step 1: Upload pictures by putting the name of the image and/or URL."),
+	instructions(Point(x_max()-750,200),"Step 1: Click 'home' and upload pictures by putting the name of the image and/or URL."),
 	tag_instructions(Point(x_max()-750,220),"Step 2: Tag pictures by clicking all the tags that apply, then click 'Add' "),
 	next_instructions(Point(x_max()-750,240),"Step 3: Use the 'next' and 'previous' buttons to nagivate through pictures, search by clicking tags and then 'search' ")
 	{
