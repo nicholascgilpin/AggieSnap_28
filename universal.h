@@ -35,10 +35,7 @@ class Display_Window : Graph_lib::Window{
 	//string next_image;
 	// Constants
 	int index = 0;					 // An index of the current db line number
-	int search_index;
 	bool search_mode;		 // true if the program is in search mode
-
-	vector<string> s_results;		// An array of picture file names
 	string db_filename = "db.txt";
 	vector<string> tag_buttons_pressed;// Use to save or search for Pic_obj's
 	// Buttons
@@ -90,6 +87,7 @@ class Display_Window : Graph_lib::Window{
 public:
 
 	Display_Window(Point xy, int w, int h, const string& title);
+	vector<string> results;
 	vector<string> f_search(string db_fname, Tag_obj t);
 	void check_index_range();	// Corrects index range errors
 	void set_search_mode(bool b);	// Changes the search_mode indicator and display
