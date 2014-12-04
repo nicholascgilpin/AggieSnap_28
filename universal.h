@@ -24,12 +24,18 @@ struct Pic_obj;
 //Class Display_Window creates the window and allows one to take input, manages the buttons and displays images
 class Display_Window : Graph_lib::Window{
 	// Data members
+
+	ifstream ifs;
+	ofstream ofs;
+	vector<string> index_read; //used in next()
+	string temp_str; //also used in next()
+	string next_image;
 	// Constants
-	static const int int_limit = 2147483640; // largest possible int and db size limit
-	static int index;					 // An index of the current db line number
+	int index = 0;					 // An index of the current db line number
 	bool search_mode;		 // true if the program is in search mode
+
 	vector<string> results;		// An array of picture file names
-	string db_filename = "Test_db.txt";
+	string db_filename = "db.txt";
 	vector<string> tag_buttons_pressed;// Use to save or search for Pic_obj's
 	// Buttons
 	Button next_button; //click to view the next picture
