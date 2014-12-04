@@ -2,7 +2,7 @@
 Intro_Window::Intro_Window(Point xy, int w, int h, const string& title):Window(xy,w,h,title),
 	continue_button(Point(x_max()-440,480),70,20,"Continue",cb_continue),
 	welcome(Point(x_max()-650,50),"Welcome to AggieSnap!"),
-	instructions(Point(x_max()-700,400),"Upload pictures by putting the name of the image and/or URL, then click add ")
+	instructions(Point(x_max()-700,400),"Upload pictures by using the following format: 'filename.jpg, tag1, tag2, etc.' ")
 	{
 		welcome.set_font_size(50);
 		attach(continue_button);
@@ -23,8 +23,8 @@ Display_Window::Display_Window(Point xy, int w, int h, const string& title):Wind
 	add_file_button(Point(x_max()-95,510),70,20,"Add",cb_add_file),
 	input_file(Point(x_max()-600,510),500,20,"Add File:"),
 	input_url(Point(x_max()-600,530),500,20,"Add URL"),
-	mode(Point(x_max()-400,15),120,30,"Displaying: "),
-	tags_displayed(Point(x_max()-600,460),500,20,"Active Tags:")
+	mode(Point(x_max()-400,20),120,30,"Displaying: "),
+	tags_displayed(Point(x_max()-600,460),120,20,"Active Tags:")
    {
 		attach(next_button);
 		attach(previous_button);
@@ -177,9 +177,11 @@ Find pictures with any combination of tags.
 //------------------THESE ARE TEMPORARY---------------------------------
 void Display_Window::next()
 {
+string raw_string,pic_name;
+int str_start,str_end;
 	if(index < 0)
 	{
-		hide();
+		hide(); //place holder
 	}
 	else
 	{
@@ -187,14 +189,16 @@ void Display_Window::next()
 		ifs.open(db_filename);
 		while(!ifs.eof())
 		{
-			getline(ifs, temp_str);
-			index_read.push_back(temp_str);
+			getline(ifs, raw_string);
+			str_start = raw_string.find('(') + 1; // gets position of the start of the pic_name
+			str_end = raw_string.find(',') - 1;	// gets position of the end of the pic_name
+			pic_name = raw_string.substr(str_start, str_end);
+			index_read.push_back(pic_name);
 		}
 		ifs.close();
 		
-		char delimiter(',');
-		getline(index_read[index], next_image, delimiter); 
-		draw_image(next_image);
+		draw_image(index_read[index]);
+		index = index + 1;
 	}
 }
 void Display_Window::previous()
@@ -307,11 +311,9 @@ void Display_Window::add_file()
 		}
 		if ((int)URLstring.find("http")>-1)//if a URL exists
 		{
-			xx<<" ";// clears the tags box
-			tags_displayed.put(xx.str()); // clears the tags displayed
 			system((string("wget -O " + file_name + " " + URLstring).c_str()));
 			ofs.open(db_filename, fstream::app);
-			ofs << index << file_name << ',' << family_s << ',' << friends_s << ',' << aggieland_s << ',' << pets_s << ',' << vacation_s << "\n";
+			ofs << file_name << ',' << family_s << ',' << friends_s << ',' << aggieland_s << ',' << pets_s << ',' << vacation_s << "\n";
 			ofs.close();
 			family_i = 0;
 			friends_i = 0;
@@ -319,28 +321,11 @@ void Display_Window::add_file()
 			pets_i = 0;
 			vacation_i = 0;
 			draw_image(file_name);
-			index = index + 1;
 		}
-
-		// you can use to_lower so that you don't have to put different cases here
-		if ((int)URLstring.find("http")>-1)//if a URL exists
+	    if (file_name.substr(file_name.find_last_of(".") + 1) == "jpg" || file_name.substr(file_name.find_last_of(".") + 1) == "jpeg" || file_name.substr(file_name.find_last_of(".") + 1) == "gif" || file_name.substr(file_name.find_last_of(".") + 1) == "JPG" || file_name.substr(file_name.find_last_of(".") + 1) == "JPEG" || file_name.substr(file_name.find_last_of(".") + 1) == "GIF" || file_name.substr(file_name.find_last_of(".") + 1) == "png")
 		{
-			xx<<" ";// clears the tags box
-			tags_displayed.put(xx.str()); // clears the tags displayed
-			system((string("wget -O " + file_name + " " + URLstring).c_str()));
-			family_i = 0;
-			friends_i = 0;
-			aggieland_i = 0;
-			pets_i = 0;
-			vacation_i = 0;
-		}
-		// you can use to_lower so that you don't have to put different cases here
-	    if (file_name.substr(file_name.find_last_of(".") + 1) == "jpg" || file_name.substr(file_name.find_last_of(".") + 1) == "jpeg" || file_name.substr(file_name.find_last_of(".") + 1) == "gif" || file_name.substr(file_name.find_last_of(".") + 1) == "JPG" || file_name.substr(file_name.find_last_of(".") + 1) == "JPEG" || file_name.substr(file_name.find_last_of(".") + 1) == "GIF" )
-		{
-			xx<<" ";// clears the tags box
-			tags_displayed.put(xx.str()); // clears the tags displayed
-			ofs.open("db.txt", fstream::app);
-			ofs << '(' << file_name << ',' << family_s << ',' << friends_s << ',' << aggieland_s << ',' << pets_s << ',' << vacation_s << "\n";
+			ofs.open(db_filename, fstream::app);
+			ofs << file_name << ',' << family_s << ',' << friends_s << ',' << aggieland_s << ',' << pets_s << ',' << vacation_s << "\n";
 			ofs.close();
 			family_i = 0;
 			friends_i = 0;
@@ -348,15 +333,10 @@ void Display_Window::add_file()
 			pets_i = 0;
 			vacation_i = 0;
 			draw_image(file_name);
-			index = index + 1;
 		}
 		else //wrong file type
 		{
-			xx<<"Input failed. Please check your file name";
-			tags_displayed.put(xx.str());
-			//Error_window e(Point(300,300), 500, 200, "Error!");
-
-			//Error_window(Point(0,0), 500, 200, "Error!");
+			Error_window(Point(0,0), 500, 200, "Error!");
 		}
 	}
 int main()
