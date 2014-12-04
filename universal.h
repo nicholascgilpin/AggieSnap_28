@@ -26,7 +26,7 @@ class Display_Window : Graph_lib::Window{
 	// Data members
 	// Constants
 	static const int int_limit = 2147483640; // largest possible int and db size limit
-	static int index;					 // An index of the current db line number
+	int index;		// An index of the current db line number
 	bool search_mode;		 // true if the program is in search mode
 	vector<string> results;		// An array of picture file names
 	string db_filename = "Test_db.txt";
