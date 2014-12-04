@@ -131,7 +131,20 @@ void Display_Window::next()
 {
 string raw_string,pic_name;
 int str_start,str_end;
-
+	if(search_mode)
+	{
+		if(index < 0)
+		{
+			check_index_range();
+		}
+		else
+		{
+			draw_image(results[index]);
+			index = index + 1;
+		}
+	}
+	else if(!search_mode)
+	{
 		if(index < 0)
 		{
 			check_index_range();
@@ -148,26 +161,32 @@ int str_start,str_end;
 				pic_name = raw_string.substr(str_start, str_end);
 				index_read.push_back(pic_name);
 			}
-			//index = index + 1;
-			if(ifs.eof())
-				{
-					index = 0;
-					//cout<<"end";
-					//index = index + 1;
-				}
 			ifs.close();
 		
 			draw_image(index_read[index]);
 			index = index + 1;
 		}
-	//}	
+	}	
 }
 void Display_Window::previous()
 {
 	string raw_string,pic_name;
 	int str_start,str_end;
-	
-	if(index < 0)
+	if(search_mode)
+	{
+		if(index < 0)
+		{
+			check_index_range();
+		}
+		else
+		{
+			draw_image(results[index]);
+			index = index - 1;
+		}
+	}
+	else if(!search_mode)
+	{
+		if(index < 0)
 		{
 			check_index_range();
 		}
@@ -188,6 +207,7 @@ void Display_Window::previous()
 		
 			draw_image(index_read[index]);
 		}
+	}
 }
 
 //-----------------------------------------------------------------------
