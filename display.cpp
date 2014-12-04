@@ -153,7 +153,7 @@ int str_start,str_end;
 		{
 			index_read.clear();                           //Stores each line of db_filename into vector index_read. Then reads index_read[index] and extracts file name and opens it.
 			ifs.open(db_filename);
-			string tag_aray[] = { "family", "friends", "aggieland", "pets", "vacation";
+			string tag_aray[] = { "family", "friends", "aggieland", "pets", "vacation" };
 			while(!ifs.eof())
 			{
 				getline(ifs, raw_string);
@@ -162,23 +162,23 @@ int str_start,str_end;
 					bool found_t = raw_string.find(tag_aray[i]);
 					if (found_t)
 					{
-						if (i == 0)
+						if ((i == 0) && (found_t>0))
 						{
 							family_i = 1;
 						}
-						if (i == 1)
+						if ((i == 1) && (found_t>0))
 						{
 							friends_i = 1;
 						}
-						if (i == 2)
+						if ((i == 2) && (found_t>0))
 						{
 							aggieland_i = 1;
 						}
-						if (i == 3)
+						if ((i == 3) && (found_t>0))
 						{
 							pets_i = 1;
 						}
-						if (i == 4)
+						if ((i == 4) && (found_t>0))
 						{
 							vacation_i = 1;
 						}
