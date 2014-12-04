@@ -28,18 +28,13 @@ class Display_Window : Graph_lib::Window{
 	ofstream ofs;
 	vector<string> index_read; //used in next()
 	string temp_str; //also used in next()
-	string next_image;
 	// Constants
 	static const int int_limit = 2147483640; // largest possible int and db size limit
 	int index = 0;					 // An index of the current db line number
+	int search_index; 				//used for next() when in search_mode
 	bool search_mode;		 // true if the program is in search mode
-<<<<<<< HEAD
 	vector<string> results;		// An array of picture file names
-	string db_filename = "db.txt";
-=======
-	vector<string> s_results;		// An array of picture file names
 	string db_filename = "Test_db.txt";
->>>>>>> FETCH_HEAD
 	vector<string> tag_buttons_pressed;// Use to save or search for Pic_obj's
 	// Buttons
 	Button next_button; //click to view the next picture
