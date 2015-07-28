@@ -1,6 +1,6 @@
 AggieSnap_28
 ============
-This beginner school project is to design and write a C++11/FLTK picture database program with a graphical user interface.
+A One Month Begginner C++ Challenge
 ============
 Team Project Specification
 Due: 11:59 P.M. Wednesday, December 3, 2014
